@@ -1,6 +1,6 @@
 # azimul-website
 
-Personal website of Azimul Kabir Apu. Built with [Astro](https://astro.build), TypeScript and Tailwind CSS v4, and deployed as static files on Cloudflare Workers.
+Personal website of Azimul Kabir Apu. Built with [Astro](https://astro.build), TypeScript and Tailwind CSS v4, and deployed to GitHub Pages at https://azimul-kabir.github.io.
 
 ## Develop
 
@@ -35,13 +35,9 @@ Star counts and latest release versions for public repositories are fetched from
 
 ## Deploy
 
-The site is fully static, so it needs no Astro adapter: `wrangler.jsonc` serves `dist/` as Workers static assets.
+`.github/workflows/deploy.yml` builds every push and pull request, and deploys `main` to GitHub Pages on each push and once a day. Repository setting required: **Settings → Pages → Source: GitHub Actions**.
 
-Manual deploy: `npx wrangler login`, then `npm run deploy`.
+### Custom domain
 
-Automatic deploy (`.github/workflows/deploy.yml`) builds every push and PR. To deploy from `main` and on the daily schedule, add these in the repository settings:
-
-- Secrets: `CLOUDFLARE_API_TOKEN` (the "Edit Cloudflare Workers" template), `CLOUDFLARE_ACCOUNT_ID`
-- Variables: `DEPLOY_ENABLED` = `true`, `SITE_URL` = your final URL, e.g. `https://azimulkabir.com`
-
-Alternatively, connect the repo with Cloudflare Workers Builds (build command `npm run build`, deploy command `npx wrangler deploy`) and leave `DEPLOY_ENABLED` unset.
+1. Add the domain under **Settings → Pages → Custom domain** and create the DNS records GitHub shows.
+2. Add a repository variable `SITE_URL` (Settings → Secrets and variables → Actions → Variables), e.g. `https://azimulkabir.com`, so canonical URLs, the sitemap and RSS use it.
