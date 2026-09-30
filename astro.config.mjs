@@ -5,8 +5,8 @@ import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 // The public URL of the site, used for canonical URLs, the sitemap and RSS.
-// Set SITE_URL in the build environment once a custom domain is connected.
-const site = process.env.SITE_URL ?? 'https://azimulkabir.com';
+// Set the SITE_URL repository variable once a custom domain is connected.
+const site = process.env.SITE_URL || 'https://azimul-kabir.github.io';
 
 export default defineConfig({
   site,
