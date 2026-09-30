@@ -1,0 +1,39 @@
+---
+import type { Project } from '~/data/projects';
+import { repoStats } from '~/lib/github';
+
+interface Props {
+  project: Project;
+}
+const { project } = Astro.props;
+const stats = project.repo ? await repoStats(project.repo) : null;
+const href = project.caseStudy ?? (project.repo ? `https://github.com/${project.repo}` : undefined);
+const external = !project.caseStudy && !!project.repo;
+---
+
+<article class="card relative flex h-full flex-col">
+  <div class="flex items-baseline justify-between gap-3">
+    <h3 class="font-serif text-xl font-semibold">
+      {
+        href ? (
+          <a href={href} class="stretched after:absolute after:inset-0" rel={external ? 'noopener' : undefined}>
+            {project.name}
+          </a>
+        ) : (
+          project.name
+        )
+      }
+    </h3>
+    {
+      project.privateNote ? (
+        <span class="text-xs text-muted">{project.privateNote}</span>
+      ) : stats && stats.stars > 0 ? (
+        <span class="text-xs text-muted" title="GitHub stars">★ {stats.stars}</span>
+      ) : null
+    }
+  </div>
+  <p class="mt-2 flex-1 text-[15px] text-muted">{project.summary}</p>
+  <ul class="mt-4 flex flex-wrap gap-1.5">
+    {project.tags.map((t) => <li class="tag">{t}</li>)}
+  </ul>
+</article>

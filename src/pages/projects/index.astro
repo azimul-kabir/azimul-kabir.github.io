@@ -1,0 +1,30 @@
+---
+import Base from '~/layouts/Base.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+import { projects } from '~/data/projects';
+
+const open = projects.filter((p) => p.repo);
+const closed = projects.filter((p) => !p.repo);
+---
+
+<Base title="Projects" description="Open-source apps, self-hosted tools and private projects by Azimul Kabir Apu.">
+  <div class="container-page pt-12 sm:pt-16">
+    <p class="eyebrow">Projects</p>
+    <h1 class="mt-4 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">Things I've built</h1>
+    <p class="mt-4 max-w-2xl text-muted">
+      Mostly tools I needed myself: a budgeting app, a music library, a photo archive and a few programs for work and
+      family.
+    </p>
+
+    <h2 class="eyebrow mt-14">Open source</h2>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {open.map((p) => <ProjectCard project={p} />)}
+    </div>
+
+    <h2 class="eyebrow mt-14">Private</h2>
+    <p class="mt-2 text-sm text-muted">Built for specific people or organisations, so the code isn't public.</p>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {closed.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </div>
+</Base>

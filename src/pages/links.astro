@@ -1,0 +1,33 @@
+---
+import Base from '~/layouts/Base.astro';
+import { profile } from '~/data/profile';
+import { social } from '~/data/social';
+---
+
+<Base title="Links" description={`Where to find ${profile.name} online.`}>
+  <div class="mx-auto max-w-md px-4 pt-12 sm:pt-16">
+    <h1 class="font-serif text-3xl font-semibold tracking-tight">{profile.name}</h1>
+    <p class="mt-2 text-muted">{profile.headline}</p>
+    <ul class="mt-8 space-y-3">
+      <li>
+        <a href="/" class="card flex items-center justify-between">
+          <span><span class="font-medium">Website</span><span class="block text-sm text-muted">Projects and writing</span></span>
+          <span aria-hidden="true" class="text-muted">→</span>
+        </a>
+      </li>
+      {
+        social.map((s) => (
+          <li>
+            <a href={s.href} class="card flex items-center justify-between" rel="me noopener">
+              <span>
+                <span class="font-medium">{s.label}</span>
+                <span class="block text-sm text-muted">{s.note}</span>
+              </span>
+              <span aria-hidden="true" class="text-muted">↗</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Base>

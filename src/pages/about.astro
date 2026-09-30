@@ -1,0 +1,64 @@
+---
+import Base from '~/layouts/Base.astro';
+import { profile, education } from '~/data/profile';
+import { work, employer } from '~/data/work';
+---
+
+<Base title="About" description={`About ${profile.name}: career in banking, open-source work and education.`}>
+  <article class="container-page pt-12 sm:pt-16">
+    <p class="eyebrow">About</p>
+    <h1 class="mt-4 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">Hello, I'm Apu.</h1>
+
+    <div class="prose mt-8 max-w-none text-[17px] prose-zinc dark:prose-invert prose-a:text-accent">
+      <p>
+        I'm {profile.name}, a banking professional from {profile.location} with an academic background in
+        Finance and Accounting &amp; Finance. I work at {employer}, where my career has gone from branch banking and
+        credit operations to management information systems and regulatory reporting at head office.
+      </p>
+      <p>
+        Outside work I build software. My main project is <a href="/projects/actua">Actua</a>, an open-source Android
+        client for Actual Budget. I also run a small home server, where I self-host music, photos and a few tools I
+        wrote for myself and my family.
+      </p>
+      <p>
+        Lately I've been using AI as part of how I build and maintain software, and experimenting with running models
+        locally. I write about what I learn in <a href="/lab">the Lab</a>.
+      </p>
+      <p>
+        Away from the keyboard I enjoy photography, music, and finding better ways to organise everyday life.
+      </p>
+    </div>
+
+    <section class="mt-16" aria-labelledby="career">
+      <h2 id="career" class="eyebrow">Career</h2>
+      <ol class="mt-6 space-y-8 border-l border-line pl-6">
+        {
+          work.map((role) => (
+            <li class="relative">
+              <span class="absolute top-2 -left-[29px] size-2.5 rounded-full border-2 border-bg bg-accent" />
+              <h3 class="font-serif text-xl font-semibold">{role.title}</h3>
+              <p class="text-sm text-muted">
+                {[role.place, role.period].filter(Boolean).join(' · ')}
+              </p>
+              <p class="mt-2 text-[15px] text-muted">{role.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="mt-16" aria-labelledby="education">
+      <h2 id="education" class="eyebrow">Education</h2>
+      <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+        {
+          education.map((e) => (
+            <li class="card">
+              <p class="font-serif text-lg font-semibold">{e.degree}</p>
+              <p class="text-sm text-muted">{e.school}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </article>
+</Base>

@@ -1,0 +1,27 @@
+---
+import { render } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import { labPosts, formatDate } from '~/lib/lab';
+
+export async function getStaticPaths() {
+  const posts = await labPosts();
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base title={post.data.title} description={post.data.description} type="article" published={post.data.date}>
+  <article class="container-page pt-12 sm:pt-16">
+    <a href="/lab" class="text-sm text-muted hover:text-fg">← The Lab</a>
+    <h1 class="mt-6 font-serif text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">{post.data.title}</h1>
+    <p class="mt-4 text-sm text-muted">
+      <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+      {post.data.tags.length > 0 && <> · {post.data.tags.join(', ')}</>}
+    </p>
+    <div class="prose mt-10 max-w-none text-[17px] prose-zinc dark:prose-invert prose-headings:font-serif prose-a:text-accent prose-code:before:content-none prose-code:after:content-none">
+      <Content />
+    </div>
+  </article>
+</Base>

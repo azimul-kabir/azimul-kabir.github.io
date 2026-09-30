@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import Base from '~/layouts/Base.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+import PostList from '~/components/PostList.astro';
+import { profile } from '~/data/profile';
+import { projects, featured } from '~/data/projects';
+import { github } from '~/data/social';
+import { labPosts, formatDate } from '~/lib/lab';
+import { repoStats } from '~/lib/github';
+import actuaHero from '~/assets/actua-hero.png';
+
+const posts = (await labPosts()).slice(0, 3);
+const others = projects.filter((p) => !p.featured).slice(0, 4);
+const actua = await repoStats(featured.repo!);
+---
+
+<Base>
+  <section class="container-page pt-12 pb-16 sm:pt-20">
+    <p class="eyebrow fade-up">{profile.headline}</p>
+    <h1 class="fade-up mt-4 font-serif text-[2.6rem] leading-[1.05] font-semibold tracking-tight sm:text-6xl">
+      {profile.name}
+    </h1>
+    <p class="fade-up mt-6 max-w-2xl font-serif text-2xl leading-snug text-muted sm:text-[1.7rem]" style="animation-delay:80ms">
+      I work in banking MIS by day and build <a href="/projects/actua" class="text-fg italic hover:text-accent">Actua</a>,
+      an open-source budgeting app for Android, by night.
+    </p>
+    <p class="fade-up mt-4 text-[15px] text-muted" style="animation-delay:140ms">
+      Based in {profile.location} · Writing about finance, software and practical AI.
+    </p>
+    <div class="fade-up mt-8 flex flex-wrap gap-3" style="animation-delay:200ms">
+      <a href="/projects/actua" class="btn btn-primary">See Actua</a>
+      <a href={github.href} class="btn" rel="me noopener">GitHub</a>
+    </div>
+  </section>
+
+  <section class="container-page" aria-labelledby="now">
+    <div class="flex items-baseline justify-between">
+      <h2 id="now" class="eyebrow">Now</h2>
+      <p class="text-xs text-muted">Updated {formatDate(new Date(profile.nowUpdated))}</p>
+    </div>
+    <dl class="mt-4 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
+      {
+        profile.now.map((item) => (
+          <div class="bg-surface p-5">
+            <dt class="text-sm font-medium">{item.label}</dt>
+            <dd class="mt-1 text-[15px] text-muted">{item.text}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <section class="container-page mt-20" aria-labelledby="featured">
+    <h2 id="featured" class="eyebrow">Featured project</h2>
+    <a href="/projects/actua" class="card mt-4 block overflow-hidden p-0">
+      <Image
+        src={actuaHero}
+        alt="Actua for Android showing the budget, category, transaction and bills screens"
+        widths={[640, 960, 1280]}
+        sizes="(min-width: 768px) 720px, 100vw"
+        class="aspect-[16/9] w-full bg-[#4B18D1] object-cover"
+        loading="eager"
+      />
+      <div class="p-5 sm:p-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 class="font-serif text-2xl font-semibold">Actua</h3>
+          <p class="text-sm text-muted">
+            {[actua?.latestRelease, actua && `★ ${actua.stars} on GitHub`].filter(Boolean).join(' · ')}
+          </p>
+        </div>
+        <p class="mt-2 text-muted">{featured.summary}</p>
+        <p class="mt-4 text-sm font-medium text-accent">Read the case study →</p>
+      </div>
+    </a>
+  </section>
+
+  <section class="container-page mt-20" aria-labelledby="projects">
+    <div class="flex items-baseline justify-between">
+      <h2 id="projects" class="eyebrow">Other projects</h2>
+      <a href="/projects" class="text-sm text-muted hover:text-fg">All projects →</a>
+    </div>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {others.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </section>
+
+  {
+    posts.length > 0 && (
+      <section class="container-page mt-20" aria-labelledby="lab">
+        <div class="flex items-baseline justify-between">
+          <h2 id="lab" class="eyebrow">From the Lab</h2>
+          <a href="/lab" class="text-sm text-muted hover:text-fg">All notes →</a>
+        </div>
+        <div class="mt-4">
+          <PostList posts={posts} />
+        </div>
+      </section>
+    )
+  }
+</Base>

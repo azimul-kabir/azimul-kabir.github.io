@@ -1,0 +1,105 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/newsreader';
+@import '@fontsource-variable/newsreader/wght-italic.css';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --fg: #18181b;
+  --muted: #5f5f68;
+  --line: #e4e4e7;
+  --accent: #166534;
+  --accent-soft: #dcfce7;
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #09090b;
+  --surface: #151518;
+  --fg: #f4f4f5;
+  --muted: #a1a1aa;
+  --line: #27272a;
+  --accent: #86efac;
+  --accent-soft: #14532d;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Newsreader Variable', ui-serif, Georgia, serif;
+}
+
+@layer base {
+  html {
+    @apply bg-bg text-fg antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg font-sans text-[17px] leading-relaxed;
+  }
+  ::selection {
+    @apply bg-accent-soft;
+  }
+  :focus-visible {
+    @apply rounded-sm outline-2 outline-offset-2 outline-accent;
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-3xl px-4 sm:px-6;
+  }
+  .eyebrow {
+    @apply text-xs font-medium tracking-[0.14em] text-muted uppercase;
+  }
+  .link {
+    @apply text-accent underline decoration-1 underline-offset-4 hover:decoration-2;
+  }
+  .btn {
+    @apply inline-flex min-h-11 items-center gap-2 rounded-full border border-line px-5 text-sm font-medium transition-colors hover:border-fg;
+  }
+  .btn-primary {
+    @apply border-fg bg-fg text-bg hover:border-accent hover:bg-accent;
+  }
+  .tag {
+    @apply rounded-full border border-line px-2.5 py-0.5 text-xs text-muted;
+  }
+  .card {
+    @apply rounded-2xl border border-line bg-surface p-5 transition-[border-color,transform] duration-200;
+  }
+  a.card:hover,
+  .card:has(a.stretched:hover) {
+    @apply -translate-y-0.5 border-muted;
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
