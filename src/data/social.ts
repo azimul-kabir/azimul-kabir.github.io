@@ -27,6 +27,7 @@ export const social: SocialLink[] = [
   },
   {
     label: 'Discord',
+    href: 'https://discord.com/users/395108876799967232',
     note: 'azimulkabir',
   },
   {
