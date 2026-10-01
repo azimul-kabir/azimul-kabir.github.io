@@ -1,6 +1,6 @@
 export const profile = {
   name: 'Azimul Kabir Apu',
-  shortName: 'Apu',
+  shortName: 'AziM',
   location: 'Bangladesh',
   headline: 'Banker who builds open-source software',
   intro:

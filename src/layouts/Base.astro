@@ -31,7 +31,7 @@ const person = {
     { '@type': 'CollegeOrUniversity', name: 'University of Southampton' },
     { '@type': 'CollegeOrUniversity', name: 'BRAC University' },
   ],
-  sameAs: social.map((s) => s.href),
+  sameAs: social.flatMap((s) => (s.href ? [s.href] : [])),
 };
 ---
 
