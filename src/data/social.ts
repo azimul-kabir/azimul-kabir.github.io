@@ -1,6 +1,7 @@
 export type SocialLink = {
   label: string;
-  href: string;
+  /** Omit for handles that have no public profile URL, such as a Discord username. */
+  href?: string;
   note: string;
   /** Show in the site footer. */
   footer?: boolean;
@@ -26,8 +27,12 @@ export const social: SocialLink[] = [
   },
   {
     label: 'Discord',
+    note: 'azimulkabir',
+  },
+  {
+    label: 'Actua Discord',
     href: 'https://discord.gg/FyGxRjmhw',
-    note: 'Actua community',
+    note: 'Actua community server',
   },
   {
     label: 'Instagram',
