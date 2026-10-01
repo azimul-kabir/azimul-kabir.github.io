@@ -1,6 +1,6 @@
 # azimul-website
 
-Personal website of Azimul Kabir AziM. Built with [Astro](https://astro.build), TypeScript and Tailwind CSS v4, and deployed to GitHub Pages at https://azimul-kabir.github.io.
+Personal website of Azimul Kabir Apu. Built with [Astro](https://astro.build), TypeScript and Tailwind CSS v4, and deployed to GitHub Pages at https://azimul-kabir.github.io.
 
 ## Develop
 

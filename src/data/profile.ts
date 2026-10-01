@@ -1,12 +1,12 @@
 export const profile = {
-  name: 'Azimul Kabir AziM',
+  name: 'Azimul Kabir Apu',
   shortName: 'AziM',
   location: 'Bangladesh',
   headline: 'Banker who builds open-source software',
   intro:
     'I work in banking MIS by day and build Actua, an open-source budgeting app for Android, by night.',
   description:
-    'Personal website of Azimul Kabir AziM, a banking professional from Bangladesh who builds open-source software, including Actua, a native Android client for Actual Budget.',
+    'Personal website of Azimul Kabir Apu, a banking professional from Bangladesh who builds open-source software, including Actua, a native Android client for Actual Budget.',
   // Update this whenever the "Now" section changes.
   nowUpdated: '2026-09-30',
   now: [
