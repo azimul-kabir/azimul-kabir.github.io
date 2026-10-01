@@ -3,44 +3,55 @@ import { Image } from 'astro:assets';
 import Base from '~/layouts/Base.astro';
 import { profile } from '~/data/profile';
 import { social } from '~/data/social';
+import { brandIcons } from '~/data/icons';
 import portrait from '~/assets/azim.jpg';
+
+const cardClass = 'card flex h-full flex-col gap-3 p-4 transition-colors hover:border-accent';
+const iconClass = 'grid size-10 place-items-center rounded-xl bg-line/60 text-fg';
 ---
 
 <Base title="Links" description={`Where to find ${profile.name} online.`}>
-  <div class="mx-auto max-w-md px-4 pt-12 sm:pt-16">
-    <Image
-      src={portrait}
-      alt={`Portrait of ${profile.name}`}
-      widths={[96, 192]}
-      sizes="96px"
-      class="size-24 rounded-full object-cover"
-    />
-    <h1 class="mt-5 font-serif text-3xl font-semibold tracking-tight">{profile.name}</h1>
-    <p class="mt-2 text-muted">{profile.headline}</p>
-    <ul class="mt-8 space-y-3">
+  <div class="container-page pt-12 sm:pt-16">
+    <div class="flex flex-col items-center text-center">
+      <Image
+        src={portrait}
+        alt={`Portrait of ${profile.name}`}
+        widths={[96, 192]}
+        sizes="96px"
+        class="size-24 rounded-full object-cover"
+      />
+      <h1 class="mt-5 font-serif text-3xl font-semibold tracking-tight">{profile.name}</h1>
+      <p class="mt-2 text-muted">{profile.headline}</p>
+    </div>
+    <ul class="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
       <li>
-        <a href="/" class="card flex items-center justify-between">
-          <span><span class="font-medium">Website</span><span class="block text-sm text-muted">Projects and writing</span></span>
-          <span aria-hidden="true" class="text-muted">→</span>
+        <a href="/" class={cardClass}>
+          <span class={iconClass} aria-hidden="true">
+            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z" />
+            </svg>
+          </span>
+          <span>
+            <span class="font-medium">Website</span>
+            <span class="block text-sm text-muted">Projects and writing</span>
+          </span>
         </a>
       </li>
       {
         social.map((s) => (
           <li>
-            {s.href ? (
-              <a href={s.href} class="card flex items-center justify-between" rel="me noopener">
-                <span>
-                  <span class="font-medium">{s.label}</span>
-                  <span class="block text-sm text-muted">{s.note}</span>
-                </span>
-                <span aria-hidden="true" class="text-muted">↗</span>
-              </a>
-            ) : (
-              <div class="card">
+            <a href={s.href} class={cardClass} rel="me noopener">
+              <span class={iconClass} aria-hidden="true">
+                <svg viewBox="0 0 24 24" class="size-5" fill="currentColor">
+                  <path d={brandIcons[s.icon]} />
+                </svg>
+              </span>
+              <span>
                 <span class="font-medium">{s.label}</span>
-                <span class="block text-sm text-muted select-all">{s.note}</span>
-              </div>
-            )}
+                <span class="block text-sm break-words text-muted">{s.note}</span>
+              </span>
+            </a>
           </li>
         ))
       }
