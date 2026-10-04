@@ -58,10 +58,10 @@ export const projects: Project[] = [
     privateNote: 'Internal tool',
   },
   {
-    slug: 'hnf-agro-inventory',
-    name: 'HnF Agro Inventory',
+    slug: 'inventory-management',
+    name: 'Inventory Management',
     summary:
-      'An offline-capable inventory and accounting application for a small agricultural business.',
+      'A self-hosted inventory and back-office system for small trading businesses, with a stock ledger, credit sales and purchases, and reports.',
     tags: ['Python', 'Django', 'Docker'],
     privateNote: 'Private',
   },
