@@ -1,3 +1,6 @@
+import type { ImageMetadata } from 'astro';
+import harmonyHero from '~/assets/harmony-hero.jpg';
+
 export type Project = {
   slug: string;
   name: string;
@@ -13,6 +16,8 @@ export type Project = {
   featured?: boolean;
   /** A project owned by someone else that I contribute to. */
   contribution?: boolean;
+  /** Screenshot shown at the top of the project card. */
+  image?: { src: ImageMetadata; alt: string };
 };
 
 export const projects: Project[] = [
@@ -40,6 +45,10 @@ export const projects: Project[] = [
       'A self-hosted music library manager that syncs playlists, organises files and feeds Navidrome, Jellyfin or Plex.',
     tags: ['Python', 'FastAPI', 'Docker'],
     repo: 'azimul-kabir/harmony',
+    image: {
+      src: harmonyHero,
+      alt: 'Harmony library and dashboard screens on desktop and mobile',
+    },
   },
   {
     slug: 'photo-migrator',
