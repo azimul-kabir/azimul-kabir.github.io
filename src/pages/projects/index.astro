@@ -3,7 +3,8 @@ import Base from '~/layouts/Base.astro';
 import ProjectCard from '~/components/ProjectCard.astro';
 import { projects } from '~/data/projects';
 
-const open = projects.filter((p) => p.repo);
+const open = projects.filter((p) => p.repo && !p.contribution);
+const contributions = projects.filter((p) => p.contribution);
 const closed = projects.filter((p) => !p.repo);
 ---
 
@@ -19,6 +20,12 @@ const closed = projects.filter((p) => !p.repo);
     <h2 class="eyebrow mt-14">Open source</h2>
     <div class="mt-4 grid gap-4 sm:grid-cols-2">
       {open.map((p) => <ProjectCard project={p} />)}
+    </div>
+
+    <h2 class="eyebrow mt-14">Contributions</h2>
+    <p class="mt-2 text-sm text-muted">Open-source projects owned by others that I help with.</p>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {contributions.map((p) => <ProjectCard project={p} />)}
     </div>
 
     <h2 class="eyebrow mt-14">Private</h2>

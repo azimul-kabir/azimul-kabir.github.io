@@ -11,6 +11,8 @@ export type Project = {
   /** Path of a case-study page on this site. */
   caseStudy?: string;
   featured?: boolean;
+  /** A project owned by someone else that I contribute to. */
+  contribution?: boolean;
 };
 
 export const projects: Project[] = [
@@ -70,6 +72,15 @@ export const projects: Project[] = [
       'Turns a daily writing prompt into a print-ready creative-writing worksheet for home learning.',
     tags: ['Python', 'Flask', 'PDF'],
     privateNote: 'Private',
+  },
+  {
+    slug: 'actuali',
+    name: 'Actuali',
+    summary:
+      'A native iOS companion app for Actual Budget. I contribute to it as a contributor.',
+    tags: ['Swift', 'iOS', 'Actual Budget'],
+    repo: 'MattFaz/actuali',
+    contribution: true,
   },
 ];
 
