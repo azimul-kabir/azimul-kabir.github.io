@@ -43,6 +43,21 @@ import portrait from '~/assets/azim.jpg';
       </p>
     </div>
 
+    <section class="mt-16" aria-labelledby="homelab">
+      <h2 id="homelab" class="eyebrow">Home server</h2>
+      <p class="mt-4 text-[15px] text-muted">
+        A Synology NAS running Docker, reachable over Tailscale and filtered by AdGuard. I self-host music, photos,
+        personal finance, documents, passwords and media.
+      </p>
+      <ul class="mt-4 flex flex-wrap gap-1.5">
+        {
+          ['Actual Budget', 'Immich', 'Navidrome', 'Vaultwarden', 'Paperless-ngx', 'Jellyfin', 'Plex'].map((t) => (
+            <li class="tag">{t}</li>
+          ))
+        }
+      </ul>
+    </section>
+
     <section class="mt-16" aria-labelledby="career">
       <h2 id="career" class="eyebrow">Career</h2>
       <ol class="mt-6 space-y-8 border-l border-line pl-6">
