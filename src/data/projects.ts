@@ -1,5 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import actuaHero from '~/assets/actua-hero.png';
+import creativeSparkHero from '~/assets/creative-spark-hero.png';
 import creditMisHero from '~/assets/credit-mis-hero.webp';
 import harmonyHero from '~/assets/harmony-hero.jpg';
 import inventoryHero from '~/assets/inventory-hero.jpg';
@@ -101,6 +102,10 @@ export const projects: Project[] = [
       'Turns a daily writing prompt into a print-ready creative-writing worksheet for home learning.',
     tags: ['Python', 'Flask', 'PDF'],
     privateNote: 'Private',
+    image: {
+      src: creativeSparkHero,
+      alt: 'Two Daily Creative Spark A4 worksheets beside the writing prompt they were generated from',
+    },
   },
   {
     slug: 'actuali',
