@@ -43,7 +43,7 @@ export const projects: Project[] = [
     featured: true,
     image: {
       src: actuaHero,
-      alt: 'Actua for Android showing the budget, category, transaction and bills screens',
+      alt: 'Actua for Android showing the transactions, budget and reports screens',
     },
   },
   {
