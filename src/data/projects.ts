@@ -97,14 +97,14 @@ export const projects: Project[] = [
   },
   {
     slug: 'creative-writing',
-    name: 'Creative Spark',
+    name: 'Daily Creative Spark',
     summary:
-      'Turns a daily writing prompt into a print-ready creative-writing worksheet for home learning.',
-    tags: ['Python', 'Flask', 'PDF'],
-    privateNote: 'Private',
+      'A home web app that makes printable creative-writing worksheets for a young writer, with a 70-prompt bank, weekly packs, star charts and a progress portfolio.',
+    tags: ['Python', 'Flask', 'PDF', 'Docker'],
+    repo: 'azimul-kabir/creative-writing',
     image: {
       src: creativeSparkHero,
-      alt: 'Two Daily Creative Spark A4 worksheets beside the writing prompt they were generated from',
+      alt: 'A Daily Creative Spark worksheet and monthly writing star chart beside a progress panel showing stories logged, longest streak and sentences per story',
     },
   },
   {
