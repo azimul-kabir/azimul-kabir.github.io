@@ -1,5 +1,8 @@
 import type { ImageMetadata } from 'astro';
+import actuaHero from '~/assets/actua-hero.png';
+import creditMisHero from '~/assets/credit-mis-hero.webp';
 import harmonyHero from '~/assets/harmony-hero.jpg';
+import inventoryHero from '~/assets/inventory-hero.jpg';
 
 export type Project = {
   slug: string;
@@ -37,6 +40,10 @@ export const projects: Project[] = [
     ],
     caseStudy: '/projects/actua',
     featured: true,
+    image: {
+      src: actuaHero,
+      alt: 'Actua for Android showing the budget, category, transaction and bills screens',
+    },
   },
   {
     slug: 'harmony',
@@ -65,6 +72,10 @@ export const projects: Project[] = [
       'An offline credit-portfolio MIS dashboard that turns month-end loan workbooks into management reporting.',
     tags: ['TypeScript', 'Banking', 'MIS'],
     privateNote: 'Internal tool',
+    image: {
+      src: creditMisHero,
+      alt: 'Portfolio Pulse executive overview with funded liability, asset-quality and portfolio movement panels',
+    },
   },
   {
     slug: 'inventory-management',
@@ -73,6 +84,10 @@ export const projects: Project[] = [
       'A self-hosted inventory and back-office system for small trading businesses, with a stock ledger, credit sales and purchases, and reports.',
     tags: ['Python', 'Django', 'Docker'],
     privateNote: 'Private',
+    image: {
+      src: inventoryHero,
+      alt: 'Inventory Management dashboard and sales line-item editor in dark and light themes',
+    },
   },
   {
     slug: 'creative-writing',

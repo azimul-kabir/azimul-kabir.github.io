@@ -4,6 +4,12 @@ import Base from '~/layouts/Base.astro';
 import { featured as actua } from '~/data/projects';
 import { repoStats } from '~/lib/github';
 import hero from '~/assets/actua-hero.png';
+import budget from '~/assets/actua-screens/budget.png';
+import transactions from '~/assets/actua-screens/transactions.png';
+import reports from '~/assets/actua-screens/reports.png';
+import billsCalendar from '~/assets/actua-screens/bills-calendar.png';
+import accounts from '~/assets/actua-screens/accounts.png';
+import rules from '~/assets/actua-screens/rules.png';
 
 const stats = await repoStats(actua.repo!);
 const facts = [
@@ -11,6 +17,14 @@ const facts = [
   { label: 'Built with', value: 'Kotlin · Jetpack Compose' },
   { label: 'License', value: 'MIT' },
   { label: 'Latest release', value: stats?.latestRelease ?? '1.4.0' },
+];
+const screens = [
+  { src: budget, alt: 'Budget screen with category balances, targets and Ready to Budget' },
+  { src: transactions, alt: 'Transactions list grouped by date with categories and accounts' },
+  { src: reports, alt: 'Reports overview with a monthly income versus expenses chart' },
+  { src: billsCalendar, alt: 'Bills calendar showing upcoming, overdue and paid scheduled transactions' },
+  { src: accounts, alt: 'Accounts screen with on-budget and off-budget balances' },
+  { src: rules, alt: 'Rules screen for automatic categorisation' },
 ];
 ---
 
@@ -51,6 +65,23 @@ const facts = [
         ))
       }
     </dl>
+
+    <h2 class="eyebrow mt-14">Screenshots</h2>
+    <ul class="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+      {
+        screens.map((s) => (
+          <li>
+            <Image
+              src={s.src}
+              alt={s.alt}
+              widths={[240, 360, 540]}
+              sizes="(min-width: 640px) 240px, 50vw"
+              class="w-full rounded-xl border border-line bg-[#4B18D1]"
+            />
+          </li>
+        ))
+      }
+    </ul>
 
     <div class="prose mt-12 max-w-none text-[17px] prose-zinc dark:prose-invert prose-headings:font-serif prose-a:text-accent">
       <h2>What it is</h2>
