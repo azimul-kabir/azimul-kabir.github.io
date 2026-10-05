@@ -13,11 +13,10 @@ export type Project = {
   tags: string[];
   /** owner/name of a public GitHub repository. Omitted for private projects. */
   repo?: string;
-  links?: { label: string; href: string }[];
+  /** Extra buttons on the project page; GitHub is added automatically for public repos. */
+  links?: { label: string; href: string; primary?: boolean }[];
   /** Set for projects that are private or internal, so no public link is shown. */
   privateNote?: string;
-  /** Path of a case-study page on this site. */
-  caseStudy?: string;
   featured?: boolean;
   /** A project owned by someone else that I contribute to. */
   contribution?: boolean;
@@ -38,9 +37,9 @@ export const projects: Project[] = [
       {
         label: 'Google Play',
         href: 'https://play.google.com/store/apps/details?id=com.azimulkabir.actua',
+        primary: true,
       },
     ],
-    caseStudy: '/projects/actua',
     featured: true,
     image: {
       src: actuaHero,
@@ -114,6 +113,10 @@ export const projects: Project[] = [
       'A native iOS companion app for Actual Budget for budgeting, logging transactions and checking balances offline on iPhone or iPad. I contribute to it.',
     tags: ['Swift', 'iOS', 'Actual Budget'],
     repo: 'MattFaz/actuali',
+    links: [
+      { label: 'App Store', href: 'https://apps.apple.com/app/actuali/id6764063765', primary: true },
+      { label: 'Website', href: 'https://actuali.mfazz.com' },
+    ],
     contribution: true,
   },
 ];

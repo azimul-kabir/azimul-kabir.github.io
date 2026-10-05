@@ -20,10 +20,13 @@ Most updates don't touch page components:
 | What | Where |
 |---|---|
 | Name, intro, "Now" section, education | `src/data/profile.ts` |
-| Projects (order, summaries, links) | `src/data/projects.ts` |
+| Projects (order, summaries, links, card image) | `src/data/projects.ts` |
+| Project pages (article, facts, screenshots) | `src/content/projects/<slug>.md`, images in `src/assets/projects/<slug>/` |
 | Career timeline, employer | `src/data/work.ts` |
 | Social links (and which appear in the footer) | `src/data/social.ts` |
 | Lab posts | `src/content/lab/*.md` or `.mdx` |
+
+Every project in `projects.ts` needs a matching `src/content/projects/<slug>.md`, which becomes `/projects/<slug>`; the build fails if one is missing. Its frontmatter takes a `tagline`, optional `facts` and a `gallery` of screenshot groups (`wide`, `phone` or `full` layout).
 
 Lab posts need `title`, `description` and `date` in the frontmatter. Posts with `draft: true` show in `npm run dev` but are left out of the build.
 
