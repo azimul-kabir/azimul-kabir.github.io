@@ -3,6 +3,7 @@ import actuaHero from '~/assets/actua-hero.png';
 import creditMisHero from '~/assets/credit-mis-hero.webp';
 import harmonyHero from '~/assets/harmony-hero.jpg';
 import inventoryHero from '~/assets/inventory-hero.jpg';
+import photoMigratorHero from '~/assets/photo-migrator-hero.png';
 
 export type Project = {
   slug: string;
@@ -49,7 +50,7 @@ export const projects: Project[] = [
     slug: 'harmony',
     name: 'Harmony',
     summary:
-      'A self-hosted music library manager that syncs playlists, organises files and feeds Navidrome, Jellyfin or Plex.',
+      'A self-hosted music manager that brings a Spotify library home: it downloads tracks, syncs playlists and organises files for Navidrome, Jellyfin or Plex.',
     tags: ['Python', 'FastAPI', 'Docker'],
     repo: 'azimul-kabir/harmony',
     image: {
@@ -61,9 +62,13 @@ export const projects: Project[] = [
     slug: 'photo-migrator',
     name: 'Photo Migrator',
     summary:
-      'A safety-first tool that merges overlapping photo and video archives into one deduplicated, verified library for Immich.',
-    tags: ['Python', 'SQLite', 'CLI'],
+      'A safety-first tool for a Synology NAS or a Mac that merges overlapping photo and video backups into one verified, deduplicated, Immich-ready library without touching the originals.',
+    tags: ['Python', 'SQLite', 'CLI', 'Web UI'],
     repo: 'azimul-kabir/photo-migrator',
+    image: {
+      src: photoMigratorHero,
+      alt: "Photo Migrator's web interface after an import, beside a plan of 89 new files, 33 already in the library and 14 duplicates",
+    },
   },
   {
     slug: 'credit-mis',
@@ -101,7 +106,7 @@ export const projects: Project[] = [
     slug: 'actuali',
     name: 'Actuali',
     summary:
-      'A native iOS companion app for Actual Budget. I contribute to it as a contributor.',
+      'A native iOS companion app for Actual Budget for budgeting, logging transactions and checking balances offline on iPhone or iPad. I contribute to it.',
     tags: ['Swift', 'iOS', 'Actual Budget'],
     repo: 'MattFaz/actuali',
     contribution: true,
