@@ -16,7 +16,7 @@ export const profile = {
     },
     {
       label: 'Building',
-      text: 'Actua 1.4, a native Android client for Actual Budget, now on Google Play.',
+      text: 'Actua, a native Android client for Actual Budget, now on Google Play.',
     },
     {
       label: 'Exploring',
