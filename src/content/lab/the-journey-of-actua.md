@@ -6,7 +6,7 @@ tags: ['Actua', 'Android', 'Open source', 'Actual Budget']
 draft: false
 ---
 
-# The Journey of Actua
+## The Journey
 
 Actua started as a simple idea: I wanted a better Android experience for Actual Budget.
 
