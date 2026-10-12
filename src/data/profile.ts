@@ -4,11 +4,11 @@ export const profile = {
   location: 'Bangladesh',
   headline: 'Banker who builds open-source software',
   intro:
-    'I work in banking MIS by day and build Actua, an open-source budgeting app for Android, by night.',
+    'I work in banking MIS by day and build Actua, an open-source budgeting app for Android, and Harmony, a self-hosted music manager, by night.',
   description:
-    'Personal website of Azimul Kabir Apu, a banking professional from Bangladesh who builds open-source software, including Actua, a native Android client for Actual Budget.',
+    'Personal website of Azimul Kabir Apu, a banking professional from Bangladesh who builds open-source software, including Actua, a native Android client for Actual Budget, and Harmony, a self-hosted music manager.',
   // Update this whenever the "Now" section changes.
-  nowUpdated: '2026-09-30',
+  nowUpdated: '2026-10-12',
   now: [
     {
       label: 'Work',
@@ -16,7 +16,7 @@ export const profile = {
     },
     {
       label: 'Building',
-      text: 'Actua, a native Android client for Actual Budget, now on Google Play.',
+      text: 'Actua, a native Android client for Actual Budget, now on Google Play, and Harmony, a self-hosted music manager for Navidrome.',
     },
     {
       label: 'Exploring',
