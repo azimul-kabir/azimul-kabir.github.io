@@ -34,7 +34,7 @@ The social preview image is `public/og.png`. Edit `scripts/og.html` and run `npx
 
 ## GitHub data
 
-Star counts and latest release versions for public repositories are fetched from the GitHub API **at build time** (`src/lib/github.ts`). Visitors never call GitHub. If the API is unreachable, the numbers are hidden and the build still succeeds. The workflow rebuilds daily to keep them current.
+Star counts and latest release versions and publication dates for public repositories are fetched from the GitHub API **at build time** (`src/lib/github.ts`). Actua's latest version and release date appear on the home page and project page. Visitors never call GitHub. If the API is unreachable, the metadata is hidden and the build still succeeds. The workflow rebuilds daily to keep it current.
 
 ## Deploy
 

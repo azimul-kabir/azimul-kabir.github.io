@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { getEntry, render } from 'astro:content';
 import Base from '~/layouts/Base.astro';
 import { projects } from '~/data/projects';
-import { repoStats } from '~/lib/github';
+import { latestReleaseLabel, repoStats } from '~/lib/github';
 
 export function getStaticPaths() {
   return projects.map((project) => ({ params: { slug: project.slug }, props: { project } }));
@@ -17,7 +17,8 @@ const { tagline, gallery } = entry.data;
 
 const stats = project.repo ? await repoStats(project.repo) : null;
 const facts = [...entry.data.facts];
-if (stats?.latestRelease) facts.push({ label: 'Latest release', value: stats.latestRelease });
+const releaseLabel = latestReleaseLabel(stats);
+if (releaseLabel) facts.push({ label: 'Latest release', value: releaseLabel });
 
 const kind = project.contribution ? 'Contribution' : project.repo ? 'Open source' : 'Private project';
 

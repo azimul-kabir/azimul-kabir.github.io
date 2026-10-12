@@ -38,8 +38,9 @@ your budget for offline use, and syncs changes back with Actual's encrypted sync
 - Budgeting, category targets, budget automations and moving money between categories
 - Transactions, splits, transfers, reconciliation and scheduled transactions with a bills calendar
 - Accounts, credit cards and payment reminders
+- Bank sync through your Actual server, including SimpleFIN and GoCardless
 - Actual's dashboard and saved custom reports, with drill-down to transactions
-- Rules and automatic categorisation
+- Rules and automatic categorisation, payee management, tags and global search
 - Imports from CSV, XLSX, PDF, SMS and notifications, plus Tasker intents
 - Password and OpenID Connect login, automatic local backups and a home-screen widget
 
@@ -52,10 +53,12 @@ recomposition audits and a release smoke test.
 
 ## Built in the open
 
-Development happens on GitHub: issues, pull requests and a public changelog. The first alpha shipped in early
-September 2026, and after a long run of beta builds for testers, 1.0.0 was released on 25 September 2026. Releases
-are available from Google Play, as APKs on GitHub, and through Obtainium. There's a
-[Discord](https://discord.gg/FyGxRjmhw) for users and testers.
+Development happens on [GitHub](https://github.com/azimul-kabir/actua), with issues, pull requests and a public
+changelog. The first alpha shipped in early September 2026, and after a long run of beta builds for testers, 1.0.0
+was released on 25 September 2026. Join the [Google Play testing group](https://groups.google.com/g/actua-testers),
+download APKs from [GitHub Releases](https://github.com/azimul-kabir/actua/releases), or install through
+[Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/azimul-kabir/actua).
+For help and discussion, join the [Actua Discord](https://discord.gg/FhedEyP97f).
 
 ## What I've learned
 

@@ -39,7 +39,7 @@ export const social: SocialLink[] = [
   {
     label: 'Actua Discord',
     icon: 'discord',
-    href: 'https://discord.gg/FyGxRjmhw',
+    href: 'https://discord.gg/FhedEyP97f',
     note: 'Actua community server',
   },
   {

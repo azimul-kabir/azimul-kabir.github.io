@@ -33,12 +33,22 @@ export const projects: Project[] = [
     tags: ['Kotlin', 'Jetpack Compose', 'Android'],
     repo: 'azimul-kabir/actua',
     links: [
-      { label: 'Website', href: 'https://actua.pages.dev' },
+      { label: 'Website', href: 'https://actua.azimulkabir.com' },
       {
-        label: 'Google Play',
-        href: 'https://play.google.com/store/apps/details?id=com.azimulkabir.actua',
+        label: 'Google Play testing',
+        href: 'https://groups.google.com/g/actua-testers',
         primary: true,
       },
+      {
+        label: 'Download APK',
+        href: 'https://github.com/azimul-kabir/actua/releases/latest',
+      },
+      {
+        label: 'Obtainium',
+        href: 'https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/azimul-kabir/actua',
+      },
+      { label: 'Discord', href: 'https://discord.gg/FhedEyP97f' },
+      { label: 'Report an issue', href: 'https://github.com/azimul-kabir/actua/issues' },
     ],
     featured: true,
     image: {

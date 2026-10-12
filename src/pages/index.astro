@@ -7,12 +7,17 @@ import { profile } from '~/data/profile';
 import { projects, featured } from '~/data/projects';
 import { github } from '~/data/social';
 import { labPosts, formatDate } from '~/lib/lab';
-import { repoStats } from '~/lib/github';
+import { latestReleaseLabel, repoStats } from '~/lib/github';
 import actuaHero from '~/assets/actua-hero.png';
 
 const posts = (await labPosts()).slice(0, 3);
 const others = projects.filter((p) => !p.featured).slice(0, 4);
 const actua = await repoStats(featured.repo!);
+const nowItems = profile.now.map((item) =>
+  item.label === 'Building' && actua?.latestRelease
+    ? { ...item, text: `Actua ${actua.latestRelease}, a native Android client for Actual Budget, now on Google Play.` }
+    : item,
+);
 ---
 
 <Base>
@@ -41,7 +46,7 @@ const actua = await repoStats(featured.repo!);
     </div>
     <dl class="mt-4 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
       {
-        profile.now.map((item) => (
+        nowItems.map((item) => (
           <div class="bg-surface p-5">
             <dt class="text-sm font-medium">{item.label}</dt>
             <dd class="mt-1 text-[15px] text-muted">{item.text}</dd>
@@ -66,7 +71,7 @@ const actua = await repoStats(featured.repo!);
         <div class="flex flex-wrap items-baseline justify-between gap-2">
           <h3 class="font-serif text-2xl font-semibold">Actua</h3>
           <p class="text-sm text-muted">
-            {[actua?.latestRelease, actua && `★ ${actua.stars} on GitHub`].filter(Boolean).join(' · ')}
+            {[latestReleaseLabel(actua), actua && `★ ${actua.stars} on GitHub`].filter(Boolean).join(' · ')}
           </p>
         </div>
         <p class="mt-2 text-muted">{featured.summary}</p>
