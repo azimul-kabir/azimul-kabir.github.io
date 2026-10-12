@@ -60,9 +60,14 @@ export const projects: Project[] = [
     slug: 'harmony',
     name: 'Harmony',
     summary:
-      'A self-hosted music manager that brings a Spotify library home: it downloads tracks, syncs playlists and organises files for Navidrome, Jellyfin or Plex.',
+      'A self-hosted music manager that syncs Spotify and YouTube Music playlists, downloads only the songs you are missing and keeps a clean, tagged library for Navidrome.',
     tags: ['Python', 'FastAPI', 'Docker'],
     repo: 'azimul-kabir/harmony',
+    links: [
+      { label: 'Website', href: 'https://harmony.azimulkabir.com', primary: true },
+      { label: 'Install guide', href: 'https://harmony.azimulkabir.com/#install' },
+      { label: 'Report an issue', href: 'https://github.com/azimul-kabir/harmony/issues' },
+    ],
     image: {
       src: harmonyHero,
       alt: 'Harmony library and dashboard screens on desktop and mobile',
