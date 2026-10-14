@@ -2,9 +2,14 @@
 // Header illustration for the "Building Software with AI" post: an AI-drafted change passes
 // three gates (written rules, tests, review) and only what survives reaches the shipped app.
 // Drawn with the site's colour tokens so it follows the light and dark themes.
+// `bare` drops the caption and margins so the drawing can double as the post's thumbnail.
+interface Props {
+  bare?: boolean;
+}
+const { bare = false } = Astro.props;
 ---
 
-<figure class="not-prose my-10">
+<figure class:list={['not-prose', !bare && 'my-10']} aria-hidden={bare ? 'true' : undefined}>
   <svg
     viewBox="0 0 720 260"
     class="h-auto w-full"
@@ -114,8 +119,12 @@
       </g>
     </g>
   </svg>
-  <figcaption class="mt-3 text-center text-sm text-muted">
-    An AI draft only ships after it gets past the written rules, the tests and a review. Each gate stops a few
-    confident guesses.
-  </figcaption>
+  {
+    !bare && (
+      <figcaption class="mt-3 text-center text-sm text-muted">
+        An AI draft only ships after it gets past the written rules, the tests and a review. Each gate stops a few
+        confident guesses.
+      </figcaption>
+    )
+  }
 </figure>

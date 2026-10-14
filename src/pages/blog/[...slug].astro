@@ -1,7 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '~/layouts/Base.astro';
-import { blogPosts, formatDate } from '~/lib/blog';
+import { blogPosts, formatDate, readingTime } from '~/lib/blog';
 
 export async function getStaticPaths() {
   const posts = await blogPosts();
@@ -17,7 +17,7 @@ const { Content } = await render(post);
     <a href="/blog" class="text-sm text-muted hover:text-fg">← Blog</a>
     <h1 class="mt-6 font-serif text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">{post.data.title}</h1>
     <p class="mt-4 text-sm text-muted">
-      <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+      <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time> · {readingTime(post.body)}
       {post.data.tags.length > 0 && <> · {post.data.tags.join(', ')}</>}
     </p>
     <div class="prose mt-10 max-w-none text-[17px] prose-zinc dark:prose-invert prose-headings:font-serif prose-a:text-accent prose-code:before:content-none prose-code:after:content-none">

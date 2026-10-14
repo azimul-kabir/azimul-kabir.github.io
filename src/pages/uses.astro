@@ -1,0 +1,121 @@
+---
+import Base from '~/layouts/Base.astro';
+
+type Item = { name: string; note?: string; href?: string };
+type Group = { id: string; title: string; items: Item[] };
+
+// Only list things actually in use. Keep notes short: what it is for, not a review.
+const groups: Group[] = [
+  {
+    id: 'devices',
+    title: 'Devices',
+    items: [
+      { name: 'MacBook Air (M1)' },
+      { name: 'Ryzen 5 PC' },
+      { name: 'iPhone Air', note: 'My everyday phone.' },
+      { name: 'Pixel 8', note: 'My backup Android phone, where I use and test Actua.' },
+      { name: 'iPad' },
+      { name: 'Apple Watch Series 10 (46 mm)' },
+    ],
+  },
+  {
+    id: 'home-server',
+    title: 'Home server',
+    items: [
+      {
+        name: 'Synology DS220+',
+        note: '6 GB of RAM and two 4 TB NAS drives, running DSM, Docker and everything listed below.',
+      },
+      { name: 'Dockge', note: 'Manages the Docker Compose stacks.', href: 'https://dockge.kuma.pet/' },
+      { name: 'Beszel', note: 'Monitors CPU, memory, disk and network.', href: 'https://beszel.dev/' },
+      { name: 'AdGuard Home', note: 'DNS and ad blocking for the home network.', href: 'https://adguard.com/en/adguard-home/overview.html' },
+      { name: 'Tailscale', note: 'Private access to the server from anywhere.', href: 'https://tailscale.com/' },
+    ],
+  },
+  {
+    id: 'self-hosted',
+    title: 'Self-hosted apps',
+    items: [
+      { name: 'Immich', note: 'Photos and videos.', href: 'https://immich.app/' },
+      { name: 'Jellyfin and Plex', note: 'Films and TV.' },
+      { name: 'Navidrome', note: 'Music streaming.', href: 'https://www.navidrome.org/' },
+      { name: 'Harmony', note: 'My own music manager for Navidrome.', href: '/projects/harmony' },
+      { name: 'Sonarr, Radarr, Prowlarr and Transmission', note: 'Download automation for the media library.' },
+      { name: 'Actual Budget', note: 'Personal finance.', href: 'https://actualbudget.org/' },
+      { name: 'Vaultwarden', note: 'Passwords.', href: 'https://github.com/dani-garcia/vaultwarden' },
+      { name: 'BentoPDF', note: 'PDF tools.', href: 'https://www.bentopdf.com/' },
+      { name: 'IT-Tools', note: 'A toolkit of small developer utilities.', href: 'https://it-tools.tech/' },
+    ],
+  },
+  {
+    id: 'building',
+    title: 'Building software',
+    items: [
+      { name: 'Kotlin and Jetpack Compose', note: 'Android apps, starting with Actua.' },
+      { name: 'Python', note: 'FastAPI, Django and Flask for self-hosted tools such as Harmony.' },
+      { name: 'TypeScript', note: 'Internal reporting tools at work.' },
+      { name: 'Docker', note: 'Packaging my tools so they run on the NAS.' },
+      { name: 'GitHub', note: 'Code, issues, pull requests, Actions and releases.' },
+      { name: 'Google Play testing and Obtainium', note: 'Getting builds to testers and users quickly.' },
+    ],
+  },
+  {
+    id: 'ai',
+    title: 'AI',
+    items: [
+      {
+        name: 'AI coding assistants',
+        note: 'For drafting changes, behind written rules, tests and my own review.',
+        href: '/blog/building-software-with-ai',
+      },
+      { name: 'Gemini and Claude', note: 'Writing prompts in Daily Creative Spark.', href: '/projects/creative-writing' },
+      { name: 'Local models', note: 'Experiments with running AI on my own hardware.' },
+    ],
+  },
+  {
+    id: 'this-site',
+    title: 'This website',
+    items: [
+      { name: 'Astro, MDX and Tailwind CSS', note: 'A static site with no JavaScript framework at runtime.' },
+      { name: 'Cloudflare Pages', note: 'Hosting, rebuilt automatically after each app release.' },
+      { name: 'Cloudflare Email Routing', note: 'Forwards hello@azimulkabir.com to my inbox.' },
+    ],
+  },
+];
+---
+
+<Base title="Uses" description="The devices, home server, tools and services Azimul Kabir Apu uses to build software.">
+  <div class="container-page pt-12 sm:pt-16">
+    <p class="eyebrow">Uses</p>
+    <h1 class="mt-4 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">What I use</h1>
+    <p class="mt-4 max-w-2xl text-muted">
+      The devices, home server, tools and services behind my projects. Much of it is open source and self-hosted.
+    </p>
+
+    {
+      groups.map((g) => (
+        <section class="mt-14" aria-labelledby={g.id}>
+          <h2 id={g.id} class="eyebrow">
+            {g.title}
+          </h2>
+          <dl class="mt-4 divide-y divide-line border-y border-line">
+            {g.items.map((item) => (
+              <div class="flex flex-col gap-0.5 py-3.5 sm:flex-row sm:gap-6">
+                <dt class="shrink-0 font-medium sm:w-60">
+                  {item.href ? (
+                    <a href={item.href} class="hover:text-accent">
+                      {item.name}
+                    </a>
+                  ) : (
+                    item.name
+                  )}
+                </dt>
+                {item.note && <dd class="text-[15px] text-muted">{item.note}</dd>}
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))
+    }
+  </div>
+</Base>
