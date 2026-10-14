@@ -34,11 +34,35 @@ The social preview image is `public/og.png`. Edit `scripts/og.html` and run `npx
 
 ## GitHub data
 
-Star counts and latest release versions and publication dates for public repositories are fetched from the GitHub API **at build time** (`src/lib/github.ts`). Actua's latest version and release date appear on the home page and project page. Visitors never call GitHub. If the API is unreachable, the metadata is hidden and the build still succeeds. The workflow rebuilds daily to keep it current.
+Star counts and latest release versions and publication dates for public repositories are fetched from the GitHub API **at build time** (`src/lib/github.ts`). Actua's latest version and release date appear on the home page and project page. Visitors never call GitHub. If the API is unreachable, the metadata is hidden and the build still succeeds. The site rebuilds within an hour of a new release (see below) and once a day for star counts.
 
 ## Deploy
 
-`.github/workflows/deploy.yml` builds every push and pull request, and deploys `main` to GitHub Pages on each push and once a day. Repository setting required: **Settings → Pages → Source: GitHub Actions**.
+The site is published in two places:
+
+- **GitHub Pages** (https://azimul-kabir.github.io): `.github/workflows/deploy.yml` builds every push and pull request and deploys `main`. Repository setting required: **Settings → Pages → Source: GitHub Actions**.
+- **Cloudflare Pages** (https://azimulkabir.com): Cloudflare builds from this repository on every push to `main`.
+
+### Automatic updates after a release
+
+`.github/workflows/refresh-releases.yml` checks every hour for a new stable (non-draft, non-pre-release) GitHub release of any project with a `repo` in `src/data/projects.ts`. When a version changes, it runs `deploy.yml`, which rebuilds GitHub Pages and then asks Cloudflare to rebuild azimulkabir.com. `deploy.yml` also does this once a day so star counts stay current.
+
+Cloudflare only rebuilds if it has a deploy hook. One-time setup:
+
+1. In Cloudflare, open **Workers & Pages → (this site) → Settings → Builds → Deploy hooks**, add a hook for the `main` branch and copy its URL.
+2. In this repository, add it as an Actions secret named `CLOUDFLARE_DEPLOY_HOOK` (**Settings → Secrets and variables → Actions → New repository secret**).
+3. Optional but recommended: in the Cloudflare Pages project, add a `GITHUB_TOKEN` environment variable holding a fine-grained GitHub token with public read-only access. Without it, Cloudflare's builds call the GitHub API anonymously and can hit its rate limit, which hides the version numbers.
+
+To refresh by hand, run **Actions → Refresh on new releases → Run workflow** and tick *Rebuild even if no release changed*.
+
+For an instant refresh instead of waiting up to an hour, an app's release workflow can send a `repository_dispatch` event of type `app-released` to this repository after publishing, for example:
+
+```yaml
+- name: Refresh azimulkabir.com
+  env:
+    GH_TOKEN: ${{ secrets.WEBSITE_DISPATCH_TOKEN }} # fine-grained token: Contents read and write on azimul-kabir.github.io
+  run: gh api repos/azimul-kabir/azimul-kabir.github.io/dispatches -f event_type=app-released
+```
 
 ### Custom domain
 

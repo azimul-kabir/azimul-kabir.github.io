@@ -47,3 +47,15 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      # azimulkabir.com is served by Cloudflare Pages, which only builds on pushes.
+      # Ask it to rebuild too so the daily refresh of stars and versions reaches it.
+      - name: Rebuild Cloudflare Pages
+        if: github.event_name != 'push'
+        env:
+          HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::warning::CLOUDFLARE_DEPLOY_HOOK is not set, so azimulkabir.com was not rebuilt."
+            exit 0
+          fi
+          curl -fsS -X POST "$HOOK" > /dev/null
