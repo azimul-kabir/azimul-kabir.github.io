@@ -6,7 +6,7 @@ import PostList from '~/components/PostList.astro';
 import { profile } from '~/data/profile';
 import { projects, featured } from '~/data/projects';
 import { github } from '~/data/social';
-import { blogPosts, formatDate } from '~/lib/blog';
+import { blogPosts, formatMonth } from '~/lib/blog';
 import { latestReleaseLabel, repoStats } from '~/lib/github';
 import actuaHero from '~/assets/actua-hero.png';
 import harmonyHero from '~/assets/harmony-hero.jpg';
@@ -20,14 +20,15 @@ const nowItems = profile.now.map((item) =>
   item.label === 'Building'
     ? {
         ...item,
-        text: `${actua?.latestRelease ? `Actua ${actua.latestRelease}` : 'Actua'}, a native Android client for Actual Budget, now on Google Play, and ${harmony?.latestRelease ? `Harmony ${harmony.latestRelease}` : 'Harmony'}, a self-hosted music manager for Navidrome.`,
+        // The featured cards below describe both apps, so this only names the current releases.
+        text: `${actua?.latestRelease ? `Actua ${actua.latestRelease}` : 'Actua'} and ${harmony?.latestRelease ? `Harmony ${harmony.latestRelease}` : 'Harmony'}, with the next releases on the way.`,
       }
     : item,
 );
 ---
 
 <Base>
-  <section class="container-page pt-12 pb-16 sm:pt-20 md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-10">
+  <section class="container-wide pt-12 pb-16 sm:pt-20 md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-10">
     <Image
       src={portrait}
       alt={`Portrait of ${profile.name}`}
@@ -58,10 +59,10 @@ const nowItems = profile.now.map((item) =>
     </div>
   </section>
 
-  <section class="container-page" aria-labelledby="now">
+  <section class="container-wide" aria-labelledby="now">
     <div class="flex items-baseline justify-between">
       <h2 id="now" class="eyebrow">Now</h2>
-      <p class="text-xs text-muted">Updated {formatDate(new Date(profile.nowUpdated))}</p>
+      <p class="text-xs text-muted">Updated {formatMonth(new Date(profile.nowUpdated))}</p>
     </div>
     <dl class="mt-4 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-3">
       {
@@ -75,50 +76,40 @@ const nowItems = profile.now.map((item) =>
     </dl>
   </section>
 
-  <section class="container-page mt-20" aria-labelledby="featured">
+  <section class="container-wide mt-20" aria-labelledby="featured">
     <h2 id="featured" class="eyebrow">Featured projects</h2>
-    <a href="/projects/actua" class="card mt-4 block overflow-hidden p-0">
-      <Image
-        src={actuaHero}
-        alt="Actua for Android showing the transactions, budget and reports screens"
-        widths={[640, 960, 1280]}
-        sizes="(min-width: 768px) 720px, 100vw"
-        class="aspect-[16/9] w-full bg-[#2a0f8a] object-cover"
-        loading="eager"
-      />
-      <div class="p-5 sm:p-6">
-        <div class="flex flex-wrap items-baseline justify-between gap-2">
-          <h3 class="font-serif text-2xl font-semibold">Actua</h3>
-          <p class="text-sm text-muted">
-            {[latestReleaseLabel(actua), actua && `★ ${actua.stars} on GitHub`].filter(Boolean).join(' · ')}
-          </p>
-        </div>
-        <p class="mt-2 text-muted">{featured.summary}</p>
-        <p class="mt-4 text-sm font-medium text-accent">Read the case study →</p>
-      </div>
-    </a>
-    <a href="/projects/harmony" class="card mt-4 block overflow-hidden p-0">
-      <Image
-        src={harmonyHero}
-        alt={harmonyProject.image!.alt}
-        widths={[640, 960, 1280]}
-        sizes="(min-width: 768px) 720px, 100vw"
-        class="w-full"
-      />
-      <div class="p-5 sm:p-6">
-        <div class="flex flex-wrap items-baseline justify-between gap-2">
-          <h3 class="font-serif text-2xl font-semibold">Harmony</h3>
-          <p class="text-sm text-muted">
-            {[latestReleaseLabel(harmony), harmony && `★ ${harmony.stars} on GitHub`].filter(Boolean).join(' · ')}
-          </p>
-        </div>
-        <p class="mt-2 text-muted">{harmonyProject.summary}</p>
-        <p class="mt-4 text-sm font-medium text-accent">Read the case study →</p>
-      </div>
-    </a>
+    <div class="mt-4 grid gap-4 md:grid-cols-2">
+      {
+        [
+          { href: '/projects/actua', name: 'Actua', image: actuaHero, alt: 'Actua for Android showing the transactions, budget and reports screens', bg: 'bg-[#2a0f8a]', stats: actua, summary: featured.summary },
+          { href: '/projects/harmony', name: 'Harmony', image: harmonyHero, alt: harmonyProject.image!.alt, bg: 'bg-[#0b1215]', stats: harmony, summary: harmonyProject.summary },
+        ].map((f) => (
+          <a href={f.href} class="card flex flex-col overflow-hidden p-0">
+            <Image
+              src={f.image}
+              alt={f.alt}
+              widths={[480, 720, 1000]}
+              sizes="(min-width: 1024px) 490px, (min-width: 768px) 50vw, 100vw"
+              class:list={['aspect-[16/9] w-full object-cover object-left', f.bg]}
+              loading="eager"
+            />
+            <div class="flex flex-1 flex-col p-5">
+              <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                <h3 class="font-serif text-2xl font-semibold">{f.name}</h3>
+                <p class="text-sm text-muted">
+                  {[latestReleaseLabel(f.stats), f.stats && `★ ${f.stats.stars}`].filter(Boolean).join(' · ')}
+                </p>
+              </div>
+              <p class="mt-2 text-[15px] text-muted">{f.summary}</p>
+              <p class="mt-auto pt-4 text-sm font-medium text-accent">Read the case study →</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
   </section>
 
-  <section class="container-page mt-20" aria-labelledby="projects">
+  <section class="container-wide mt-20" aria-labelledby="projects">
     <div class="flex items-baseline justify-between">
       <h2 id="projects" class="eyebrow">Other projects</h2>
       <a href="/projects" class="text-sm text-muted hover:text-fg">All projects →</a>
@@ -130,7 +121,7 @@ const nowItems = profile.now.map((item) =>
 
   {
     posts.length > 0 && (
-      <section class="container-page mt-20" aria-labelledby="blog">
+      <section class="container-wide mt-20" aria-labelledby="blog">
         <div class="flex items-baseline justify-between">
           <h2 id="blog" class="eyebrow">From the blog</h2>
           <a href="/blog" class="text-sm text-muted hover:text-fg">All posts →</a>
