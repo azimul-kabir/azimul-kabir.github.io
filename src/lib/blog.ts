@@ -7,3 +7,6 @@ export async function blogPosts() {
 
 export const formatDate = (d: Date) =>
   d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+
+/** Month and year only, for dates that shouldn't look stale after a few days (e.g. the "Now" section). */
+export const formatMonth = (d: Date) => d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });

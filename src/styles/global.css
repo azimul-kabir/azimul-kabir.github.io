@@ -60,6 +60,10 @@
   .container-page {
     @apply mx-auto w-full max-w-3xl px-4 sm:px-6;
   }
+  /* Wider column for the header, footer, grids and project pages; text inside stays at reading width. */
+  .container-wide {
+    @apply mx-auto w-full max-w-5xl px-4 sm:px-6;
+  }
   .eyebrow {
     @apply text-xs font-medium tracking-[0.14em] text-muted uppercase;
   }
