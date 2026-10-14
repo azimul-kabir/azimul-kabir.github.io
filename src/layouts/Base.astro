@@ -16,7 +16,7 @@ interface Props {
 const { title, description = profile.description, type = 'website', published } = Astro.props;
 const fullTitle = title
   ? `${title} | ${profile.name}`
-  : `${profile.name} | Banker & Open-Source Developer`;
+  : `${profile.name} | Banker & Software Developer`;
 // Pages are built as /page.html (build.format 'file') but served without the extension,
 // so drop '.html' and 'index' to point at the URL visitors and search engines actually use.
 const canonical = new URL(Astro.url.pathname.replace(/(index)?\.html$/, ''), Astro.site);
@@ -27,7 +27,7 @@ const person = {
   '@type': 'Person',
   name: profile.name,
   url: Astro.site?.href,
-  jobTitle: 'Banker and open-source developer',
+  jobTitle: 'Banker and software developer',
   address: { '@type': 'PostalAddress', addressCountry: 'BD' },
   alumniOf: [
     { '@type': 'CollegeOrUniversity', name: 'University of Southampton' },
