@@ -10,6 +10,7 @@ import { blogPosts, formatDate } from '~/lib/blog';
 import { latestReleaseLabel, repoStats } from '~/lib/github';
 import actuaHero from '~/assets/actua-hero.png';
 import harmonyHero from '~/assets/harmony-hero.jpg';
+import portrait from '~/assets/azim.jpg';
 
 const posts = (await blogPosts()).slice(0, 3);
 const harmonyProject = projects.find((p) => p.slug === 'harmony')!;
@@ -26,22 +27,32 @@ const nowItems = profile.now.map((item) =>
 ---
 
 <Base>
-  <section class="container-page pt-12 pb-16 sm:pt-20">
-    <p class="eyebrow fade-up">{profile.headline}</p>
-    <h1 class="fade-up mt-4 font-serif text-[2.6rem] leading-[1.05] font-semibold tracking-tight sm:text-6xl">
-      {profile.name}
-    </h1>
-    <p class="fade-up mt-6 max-w-2xl font-serif text-2xl leading-snug text-muted sm:text-[1.7rem]" style="animation-delay:80ms">
-      I work in banking MIS by day and build <a href="/projects/actua" class="text-fg italic hover:text-accent">Actua</a>,
-      an open-source budgeting app for Android, and
-      <a href="/projects/harmony" class="text-fg italic hover:text-accent">Harmony</a>, a self-hosted music manager, by night.
-    </p>
-    <p class="fade-up mt-4 text-[15px] text-muted" style="animation-delay:140ms">
-      Based in {profile.location} · Writing about finance, software and practical AI.
-    </p>
-    <div class="fade-up mt-8 flex flex-wrap gap-3" style="animation-delay:200ms">
-      <a href="/projects/actua" class="btn btn-primary">See Actua</a>
-      <a href={github.href} class="btn" rel="me noopener">GitHub</a>
+  <section class="container-page pt-12 pb-16 sm:pt-20 md:grid md:grid-cols-[1fr_auto] md:items-center md:gap-10">
+    <Image
+      src={portrait}
+      alt={`Portrait of ${profile.name}`}
+      widths={[96, 192, 320, 400]}
+      sizes="(min-width: 768px) 192px, 96px"
+      class="fade-up mb-6 size-24 rounded-full border border-line object-cover md:order-2 md:mb-0 md:size-48"
+      loading="eager"
+    />
+    <div class="md:order-1">
+      <p class="eyebrow fade-up">{profile.headline}</p>
+      <h1 class="fade-up mt-4 font-serif text-[2.6rem] leading-[1.05] font-semibold tracking-tight sm:text-6xl">
+        {profile.name}
+      </h1>
+      <p class="fade-up mt-6 max-w-2xl font-serif text-2xl leading-snug text-muted sm:text-[1.7rem]" style="animation-delay:80ms">
+        I work in banking MIS by day and build <a href="/projects/actua" class="text-fg italic hover:text-accent">Actua</a>,
+        an open-source budgeting app for Android, and{' '}
+        <a href="/projects/harmony" class="text-fg italic hover:text-accent">Harmony</a>, a self-hosted music manager, by night.
+      </p>
+      <p class="fade-up mt-4 text-[15px] text-muted" style="animation-delay:140ms">
+        Based in {profile.location} · Writing about finance, software and practical AI.
+      </p>
+      <div class="fade-up mt-8 flex flex-wrap gap-3" style="animation-delay:200ms">
+        <a href="/projects/actua" class="btn btn-primary">See Actua</a>
+        <a href={github.href} class="btn" rel="me noopener">GitHub</a>
+      </div>
     </div>
   </section>
 
