@@ -62,9 +62,16 @@ For help and discussion, join the [Actua Discord](https://discord.gg/FhedEyP97f)
 
 ## What I've learned
 
-<!-- TODO(AziM): replace with your own reflections. -->
+- **A finance app is judged on its details.** Quick, predictable transactions, clear balances and easy categories
+  matter more than any headline feature. A bug is not just an annoyance: it is someone's money that no longer adds up.
+- **Testers are the best guide.** Shipping a beta almost every day only worked because testers kept installing builds
+  and reporting what broke.
+- **Using the product helps.** I use Actual myself and know its ins and outs, so I usually know how something should
+  work and where it could be better.
+- **Parity needs proof.** Comparing Actua's results with Actual's own engine catches the mistakes a convincing
+  explanation would miss.
 
-This section is still being written.
+There's more in [The Journey of Actua](/blog/the-journey-of-actua).
 
 <p class="text-sm text-muted">
   Actua is an independent community project and is not affiliated with or endorsed by Actual Budget.

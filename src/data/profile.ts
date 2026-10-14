@@ -2,6 +2,7 @@ export const profile = {
   name: 'Azimul Kabir Apu',
   shortName: 'AziM',
   location: 'Bangladesh',
+  email: 'hello@azimulkabir.com',
   headline: 'Banker who builds software',
   intro:
     'I work in banking MIS by day and build Actua, an open-source budgeting app for Android, and Harmony, a self-hosted music manager, by night.',
