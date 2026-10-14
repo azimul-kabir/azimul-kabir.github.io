@@ -40,7 +40,7 @@ const groups: Group[] = [
       { name: 'Jellyfin and Plex', note: 'Films and TV.' },
       { name: 'Navidrome', note: 'Music streaming.', href: 'https://www.navidrome.org/' },
       { name: 'Harmony', note: 'My own music manager for Navidrome.', href: '/projects/harmony' },
-      { name: 'Sonarr, Radarr, Prowlarr and Transmission', note: 'Download automation for the media library.' },
+      { name: 'Sonarr, Radarr and Prowlarr', note: 'Download automation for the media library, with Transmission.' },
       { name: 'Actual Budget', note: 'Personal finance.', href: 'https://actualbudget.org/' },
       { name: 'Vaultwarden', note: 'Passwords.', href: 'https://github.com/dani-garcia/vaultwarden' },
       { name: 'BentoPDF', note: 'PDF tools.', href: 'https://www.bentopdf.com/' },
@@ -56,7 +56,7 @@ const groups: Group[] = [
       { name: 'TypeScript', note: 'Internal reporting tools at work.' },
       { name: 'Docker', note: 'Packaging my tools so they run on the NAS.' },
       { name: 'GitHub', note: 'Code, issues, pull requests, Actions and releases.' },
-      { name: 'Google Play testing and Obtainium', note: 'Getting builds to testers and users quickly.' },
+      { name: 'Google Play and Obtainium', note: 'Getting builds to testers and users quickly.' },
     ],
   },
   {
@@ -100,8 +100,8 @@ const groups: Group[] = [
           </h2>
           <dl class="mt-4 divide-y divide-line border-y border-line">
             {g.items.map((item) => (
-              <div class="flex flex-col gap-0.5 py-3.5 sm:flex-row sm:gap-6">
-                <dt class="shrink-0 font-medium sm:w-60">
+              <div class="flex flex-col gap-0.5 py-2.5 sm:flex-row sm:items-baseline sm:gap-6">
+                <dt class="shrink-0 text-[15px] font-medium sm:w-64">
                   {item.href ? (
                     <a href={item.href} class="hover:text-accent">
                       {item.name}
