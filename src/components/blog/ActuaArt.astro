@@ -2,9 +2,14 @@
 // Header illustration for "The Journey of Actua": an Android phone showing budget categories,
 // syncing both ways with a self-hosted Actual Budget server. Drawn with the site's colour tokens
 // so it follows the light and dark themes.
+// `bare` drops the caption and margins so the drawing can double as the post's thumbnail.
+interface Props {
+  bare?: boolean;
+}
+const { bare = false } = Astro.props;
 ---
 
-<figure class="not-prose my-10">
+<figure class:list={['not-prose', !bare && 'my-10']} aria-hidden={bare ? 'true' : undefined}>
   <svg viewBox="0 0 720 280" class="h-auto w-full" role="img" aria-labelledby="actua-art-title">
     <title id="actua-art-title">
       An Android phone showing budget categories, syncing both ways with a self-hosted Actual Budget server.
@@ -82,7 +87,11 @@
       <circle cx="584" cy="188" r="4.5" style="fill: var(--accent)" opacity="0.5" />
     </g>
   </svg>
-  <figcaption class="mt-3 text-center text-sm text-muted">
-    Actua keeps a full copy of the budget on the phone and syncs every change with your own Actual Budget server.
-  </figcaption>
+  {
+    !bare && (
+      <figcaption class="mt-3 text-center text-sm text-muted">
+        Actua keeps a full copy of the budget on the phone and syncs every change with your own Actual Budget server.
+      </figcaption>
+    )
+  }
 </figure>

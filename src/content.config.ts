@@ -11,6 +11,8 @@ const blog = defineCollection({
     updated: z.coerce.date().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    /** Header illustration reused as the post's thumbnail in post lists (see PostCover.astro). */
+    cover: z.enum(['guardrail', 'actua']).optional(),
   }),
 });
 

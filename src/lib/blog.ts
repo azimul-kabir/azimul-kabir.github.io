@@ -10,3 +10,13 @@ export const formatDate = (d: Date) =>
 
 /** Month and year only, for dates that shouldn't look stale after a few days (e.g. the "Now" section). */
 export const formatMonth = (d: Date) => d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+
+/** Rough minutes to read a post, at 220 words a minute, ignoring MDX imports and component tags. */
+export function readingTime(body = '') {
+  const text = body
+    .replace(/^import .*$/gm, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/[#*_`>\[\]()!]/g, ' ');
+  const words = text.split(/\s+/).filter(Boolean).length;
+  return `${Math.max(1, Math.round(words / 220))} min read`;
+}

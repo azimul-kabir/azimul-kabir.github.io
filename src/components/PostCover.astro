@@ -1,0 +1,14 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import GuardrailArt from '~/components/blog/GuardrailArt.astro';
+import ActuaArt from '~/components/blog/ActuaArt.astro';
+
+// Shows a post's header illustration as a thumbnail, or nothing if the post has no cover.
+interface Props {
+  cover: CollectionEntry<'blog'>['data']['cover'];
+}
+const { cover } = Astro.props;
+---
+
+{cover === 'guardrail' && <GuardrailArt bare />}
+{cover === 'actua' && <ActuaArt bare />}

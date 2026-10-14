@@ -1,0 +1,103 @@
+---
+import Base from '~/layouts/Base.astro';
+
+type Item = { name: string; note: string; href?: string };
+type Group = { id: string; title: string; items: Item[] };
+
+// Only list things actually in use. Keep notes short: what it is for, not a review.
+const groups: Group[] = [
+  {
+    id: 'devices',
+    title: 'Devices',
+    items: [
+      { name: 'iPhone', note: 'My everyday phone.' },
+      { name: 'A backup Android phone', note: 'Where I use and test Actua.' },
+    ],
+  },
+  {
+    id: 'home-server',
+    title: 'Home server',
+    items: [
+      { name: 'Synology NAS', note: 'Runs Docker and the apps below.' },
+      { name: 'Tailscale', note: 'Private access to the server from anywhere.', href: 'https://tailscale.com/' },
+      { name: 'AdGuard', note: 'Filters ads and trackers for the home network.', href: 'https://adguard.com/' },
+      { name: 'Actual Budget', note: 'Personal finance.', href: 'https://actualbudget.org/' },
+      { name: 'Immich', note: 'Photos and videos.', href: 'https://immich.app/' },
+      { name: 'Navidrome', note: 'Music, managed with my own Harmony.', href: 'https://www.navidrome.org/' },
+      { name: 'Vaultwarden', note: 'Passwords.', href: 'https://github.com/dani-garcia/vaultwarden' },
+      { name: 'Paperless-ngx', note: 'Documents.', href: 'https://docs.paperless-ngx.com/' },
+      { name: 'Jellyfin and Plex', note: 'Media.' },
+    ],
+  },
+  {
+    id: 'building',
+    title: 'Building software',
+    items: [
+      { name: 'Kotlin and Jetpack Compose', note: 'Android apps, starting with Actua.' },
+      { name: 'Python', note: 'FastAPI, Django and Flask for self-hosted tools such as Harmony.' },
+      { name: 'TypeScript', note: 'Internal reporting tools at work.' },
+      { name: 'Docker', note: 'Packaging my tools so they run on the NAS.' },
+      { name: 'GitHub', note: 'Code, issues, pull requests, Actions and releases.' },
+      { name: 'Google Play testing and Obtainium', note: 'Getting builds to testers and users quickly.' },
+    ],
+  },
+  {
+    id: 'ai',
+    title: 'AI',
+    items: [
+      {
+        name: 'AI coding assistants',
+        note: 'For drafting changes, behind written rules, tests and my own review.',
+        href: '/blog/building-software-with-ai',
+      },
+      { name: 'Gemini and Claude', note: 'Writing prompts in Daily Creative Spark.', href: '/projects/creative-writing' },
+      { name: 'Local models', note: 'Experiments with running AI on my own hardware.' },
+    ],
+  },
+  {
+    id: 'this-site',
+    title: 'This website',
+    items: [
+      { name: 'Astro, MDX and Tailwind CSS', note: 'A static site with no JavaScript framework at runtime.' },
+      { name: 'Cloudflare Pages', note: 'Hosting, rebuilt automatically after each app release.' },
+      { name: 'Cloudflare Email Routing', note: 'Forwards hello@azimulkabir.com to my inbox.' },
+    ],
+  },
+];
+---
+
+<Base title="Uses" description="The devices, home server, tools and services Azimul Kabir Apu uses to build software.">
+  <div class="container-page pt-12 sm:pt-16">
+    <p class="eyebrow">Uses</p>
+    <h1 class="mt-4 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">What I use</h1>
+    <p class="mt-4 max-w-2xl text-muted">
+      The devices, home server, tools and services behind my projects. Much of it is open source and self-hosted.
+    </p>
+
+    {
+      groups.map((g) => (
+        <section class="mt-14" aria-labelledby={g.id}>
+          <h2 id={g.id} class="eyebrow">
+            {g.title}
+          </h2>
+          <dl class="mt-4 divide-y divide-line border-y border-line">
+            {g.items.map((item) => (
+              <div class="flex flex-col gap-0.5 py-3.5 sm:flex-row sm:gap-6">
+                <dt class="shrink-0 font-medium sm:w-60">
+                  {item.href ? (
+                    <a href={item.href} class="hover:text-accent">
+                      {item.name}
+                    </a>
+                  ) : (
+                    item.name
+                  )}
+                </dt>
+                <dd class="text-[15px] text-muted">{item.note}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      ))
+    }
+  </div>
+</Base>
