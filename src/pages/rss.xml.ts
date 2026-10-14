@@ -1,12 +1,12 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { profile } from '~/data/profile';
-import { labPosts } from '~/lib/lab';
+import { blogPosts } from '~/lib/blog';
 
 export async function GET(context: APIContext) {
-  const posts = await labPosts();
+  const posts = await blogPosts();
   return rss({
-    title: `${profile.name}: The Lab`,
+    title: `${profile.name}: Blog`,
     description: 'Notes, experiments and things I am learning.',
     site: context.site!,
     trailingSlash: false,
@@ -14,7 +14,7 @@ export async function GET(context: APIContext) {
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.date,
-      link: `/lab/${post.id}`,
+      link: `/blog/${post.id}`,
     })),
   });
 }

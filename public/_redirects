@@ -1,0 +1,3 @@
+# Cloudflare Pages redirects. The Lab was renamed to the Blog in October 2026.
+/lab    /blog          301
+/lab/*  /blog/:splat   301

@@ -5,9 +5,10 @@ import { profile } from '~/data/profile';
 const nav = [
   { href: '/about', label: 'About' },
   { href: '/projects', label: 'Projects' },
-  { href: '/lab', label: 'Lab' },
+  { href: '/blog', label: 'Blog' },
 ];
-const path = Astro.url.pathname;
+// Pages are built as page.html (build.format 'file'), so drop the extension before comparing.
+const path = Astro.url.pathname.replace(/\.html$/, '');
 ---
 
 <header class="container-page flex items-center justify-between gap-4 py-6">
