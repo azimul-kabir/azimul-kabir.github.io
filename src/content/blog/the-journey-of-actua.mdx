@@ -1,0 +1,99 @@
+---
+title: 'The Journey of Actua'
+description: 'How a small Android project grew into Actua, an open-source Actual Budget client with 70 releases in its first six weeks.'
+date: 2026-10-02
+updated: 2026-10-14
+tags: ['Actua', 'Android', 'Open source', 'Actual Budget']
+draft: false
+---
+
+import { Image } from 'astro:assets';
+import ActuaArt from '~/components/blog/ActuaArt.astro';
+import ActuaTimeline from '~/components/blog/ActuaTimeline.astro';
+import BuildLoop from '~/components/blog/BuildLoop.astro';
+import budgetShot from '~/assets/projects/actua/budget.png';
+import transactionsShot from '~/assets/projects/actua/transactions.png';
+import reportsShot from '~/assets/projects/actua/reports.png';
+
+[Actua](/projects/actua) has a slightly unusual origin: I am mostly an iPhone user.
+
+I was already using [Actual Budget](https://actualbudget.org/) and liked the philosophy behind it. It gave me the flexibility I wanted for managing my finances, without locking everything into a proprietary ecosystem. When I found out that a native iOS app for Actual was in the works, I started to think about the people on the other side. Why shouldn't Android users get a native experience too, one that felt natural, modern and at home on their platform?
+
+That thought eventually turned into code.
+
+<ActuaArt />
+
+## Standing on two open-source projects
+
+Actua did not start from a blank page. It stands on the work of two other projects.
+
+The first is **Actual Budget** itself. Actua talks to the same self-hosted server, syncs with the same protocol and stores budgets in the same format, so a change made on the phone shows up in Actual on the desktop, and the other way round.
+
+The second is **Actuali**, Matt Farrell's open-source iOS client for Actual, and the native app that inspired me in the first place. Actua began as an independent Android reimplementation of it, and Actuali is still a reference I check when I want to know how a budget, rule or sync detail should behave. Actua's README and NOTICE file credit it.
+
+But Actua was never a straight copy. I did many things differently and added ideas of my own. Some of those later went back the other way: I opened pull requests directly on Matt's Actuali repository, and they became part of the iOS app too. You can see [my contributions to Actuali](/projects/actuali) on its project page. Two apps on two platforms, learning from each other, is one of the nicer things about open source.
+
+The goal was never just a new name. I wanted a polished Android client for the Actual experience, kept open source, with its features available to everyone instead of hidden behind a paywall.
+
+## From first alpha to 1.0 in twenty days
+
+Once it started, it moved quickly. The first alpha build went out on 5 September 2026. Fourteen alpha builds and more than forty betas later, Actua dropped the beta label on 25 September.
+
+<ActuaTimeline />
+
+Shipping that often was only possible because testers kept installing builds and reporting what broke. Many betas fixed something a tester had actually run into, which is a much better guide than guesswork.
+
+It also helped that I use Actual myself and know its ins and outs, so I usually know how something should work and where it could be better. I also keep a backup Android phone, where I use and test Actua myself.
+
+## Learning by building
+
+One of the most interesting parts of the journey has been discovering how many small details matter in a finance app.
+
+Transactions need to feel quick and predictable. Account balances need to be clear. Choosing a category needs to be easy. Reconciliation needs to stay focused. Animations should feel smooth rather than distracting.
+
+<figure class="not-prose my-10">
+  <div class="grid grid-cols-3 gap-3 sm:gap-4">
+    <Image src={budgetShot} alt="Actua's budget screen with category balances and Ready to Budget" widths={[240, 360, 480]} sizes="(min-width: 768px) 230px, 30vw" class="w-full rounded-xl border border-line" />
+    <Image src={transactionsShot} alt="Actua's transactions list grouped by date" widths={[240, 360, 480]} sizes="(min-width: 768px) 230px, 30vw" class="w-full rounded-xl border border-line" />
+    <Image src={reportsShot} alt="Actua's reports screen with a monthly income versus expenses chart" widths={[240, 360, 480]} sizes="(min-width: 768px) 230px, 30vw" class="w-full rounded-xl border border-line" />
+  </div>
+  <figcaption class="mt-3 text-center text-sm text-muted">Budget, transactions and reports in Actua.</figcaption>
+</figure>
+
+Then there are the less visible parts: bank synchronisation, imports, reports, account organisation, edge cases, testing across Android versions, and making sure a change never breaks an existing workflow. In a budgeting app, a bug is not just an annoyance. It is someone's money that no longer adds up.
+
+Many of Actua's features started as a small idea or a GitHub issue, then took shape through implementation, testing, feedback and another round of fixes.
+
+## From my phone to other people's
+
+A major milestone was taking Actua beyond my own Android phone and into Google Play closed testing.
+
+That changed the nature of the project. It was no longer about whether something worked for me. Other people had to be able to install it, understand it, use it with their own budgets and tell me when something went wrong. Play Store requirements, tester enrolment, release notes, issue tracking and community support all became part of the work.
+
+## Building in public
+
+One thing I have particularly enjoyed is building Actua in the open.
+
+<BuildLoop />
+
+Ideas become GitHub issues. Issues become pull requests. Pull requests become releases. Feedback turns into the next issue, and the cycle starts again.
+
+Some changes are tiny improvements most people will never notice. Others change how the app is used: account reordering and groups, a faster way to add transactions, better categories, reports, bank sync and a single consistent design. All of them came out of that loop.
+
+That is what makes open source interesting to me. The project is never really finished.
+
+## Where Actua is today
+
+Actua is now on version 1.8, with 70 releases since the first alpha. You can install it from Google Play, download it from GitHub, or follow updates with Obtainium.
+
+There is still a lot I want to improve. I want Actua to feel fast, polished, familiar and genuinely useful every time someone opens it. I also want to keep it open and accessible, with features available to everyone rather than slowly turning into a collection of paid unlocks.
+
+## What comes next
+
+I don't have a grand startup story behind Actua.
+
+It is simply a project that grew because I wanted to solve a problem, enjoyed building the solution and kept finding things worth improving. From a small Android experiment to something other people install and rely on, the journey has already been much bigger than I expected.
+
+And I'm still building.
+
+If you use Actual Budget, you can [find Actua on its project page](/projects/actua), [join the Discord](https://discord.gg/FhedEyP97f) or [open an issue on GitHub](https://github.com/azimul-kabir/actua/issues). Feedback, bug reports, feature ideas and contributions are always welcome.
