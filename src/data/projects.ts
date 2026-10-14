@@ -2,6 +2,7 @@ import type { ImageMetadata } from 'astro';
 import actuaHero from '~/assets/actua-hero.png';
 import creativeSparkHero from '~/assets/creative-spark-hero.png';
 import creditMisHero from '~/assets/credit-mis-hero.webp';
+import actualiHero from '~/assets/actuali-hero.jpg';
 import harmonyHero from '~/assets/harmony-hero.jpg';
 import inventoryHero from '~/assets/inventory-hero.jpg';
 import photoMigratorHero from '~/assets/photo-migrator-hero.png';
@@ -125,7 +126,7 @@ export const projects: Project[] = [
     slug: 'actuali',
     name: 'Actuali',
     summary:
-      'A native iOS companion app for Actual Budget for budgeting, logging transactions and checking balances offline on iPhone or iPad. I contribute to it.',
+      'A native iOS companion app for Actual Budget for budgeting, logging transactions and checking balances offline on iPhone or iPad.',
     tags: ['Swift', 'iOS', 'Actual Budget'],
     repo: 'MattFaz/actuali',
     links: [
@@ -133,6 +134,10 @@ export const projects: Project[] = [
       { label: 'Website', href: 'https://actuali.mfazz.com' },
     ],
     contribution: true,
+    image: {
+      src: actualiHero,
+      alt: "Actuali's budget, add transaction and accounts screens on iPhone",
+    },
   },
 ];
 
