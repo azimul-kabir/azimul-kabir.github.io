@@ -2,11 +2,11 @@ export const profile = {
   name: 'Azimul Kabir Apu',
   shortName: 'AziM',
   location: 'Bangladesh',
-  headline: 'Banker who builds open-source software',
+  headline: 'Banker who builds software',
   intro:
     'I work in banking MIS by day and build Actua, an open-source budgeting app for Android, and Harmony, a self-hosted music manager, by night.',
   description:
-    'Personal website of Azimul Kabir Apu, a banking professional from Bangladesh who builds open-source software, including Actua, a native Android client for Actual Budget, and Harmony, a self-hosted music manager.',
+    'Personal website of Azimul Kabir Apu, a banking professional from Bangladesh who builds software, including Actua, an open-source Android client for Actual Budget, and Harmony, a self-hosted music manager.',
   // Update this whenever the "Now" section changes.
   nowUpdated: '2026-10-12',
   now: [
