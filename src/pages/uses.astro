@@ -1,7 +1,7 @@
 ---
 import Base from '~/layouts/Base.astro';
 
-type Item = { name: string; note: string; href?: string };
+type Item = { name: string; note?: string; href?: string };
 type Group = { id: string; title: string; items: Item[] };
 
 // Only list things actually in use. Keep notes short: what it is for, not a review.
@@ -10,15 +10,22 @@ const groups: Group[] = [
     id: 'devices',
     title: 'Devices',
     items: [
-      { name: 'iPhone', note: 'My everyday phone.' },
-      { name: 'A backup Android phone', note: 'Where I use and test Actua.' },
+      { name: 'MacBook Air (M1)' },
+      { name: 'Ryzen 5 PC' },
+      { name: 'iPhone Air', note: 'My everyday phone.' },
+      { name: 'Pixel 8', note: 'My backup Android phone, where I use and test Actua.' },
+      { name: 'iPad' },
+      { name: 'Apple Watch Series 10', note: '46 mm.' },
     ],
   },
   {
     id: 'home-server',
     title: 'Home server',
     items: [
-      { name: 'Synology NAS', note: 'Runs DSM, Docker and everything listed below.' },
+      {
+        name: 'Synology DS220+',
+        note: '6 GB of RAM and two 4 TB NAS drives, running DSM, Docker and everything listed below.',
+      },
       { name: 'Dockge', note: 'Manages the Docker Compose stacks.', href: 'https://dockge.kuma.pet/' },
       { name: 'Beszel', note: 'Monitors CPU, memory, disk and network.', href: 'https://beszel.dev/' },
       { name: 'AdGuard Home', note: 'DNS and ad blocking for the home network.', href: 'https://adguard.com/en/adguard-home/overview.html' },
@@ -103,7 +110,7 @@ const groups: Group[] = [
                     item.name
                   )}
                 </dt>
-                <dd class="text-[15px] text-muted">{item.note}</dd>
+                {item.note && <dd class="text-[15px] text-muted">{item.note}</dd>}
               </div>
             ))}
           </dl>
