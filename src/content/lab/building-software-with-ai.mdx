@@ -1,6 +1,6 @@
 ---
 title: 'Building Software with AI Without Giving Up Engineering Judgment'
-description: 'How AI coding assistants fit into my workflow, where they save time, where they make mistakes, and why testing, reviewing and understanding the code still matter.'
+description: 'How AI coding assistants fit into my workflow, where they save time, where they make mistakes, and why testing, reviewing and understanding the change still matter.'
 date: 2026-10-14
 tags: ['AI', 'Software engineering', 'Actua', 'Open source']
 draft: false
@@ -66,15 +66,17 @@ When an assistant changes sync or budget code, it does not matter how convincing
 
 ### Review harder where the stakes are higher
 
-Every Actua pull request is labelled automatically by which files it touches. Documentation and assets are low risk. Sync, database, security, budget and rules code is high risk and gets a slow, careful review, whoever wrote it. AI makes it cheap to produce large changes, so I try to keep pull requests small enough that I can actually read them.
+Every Actua pull request is labelled automatically by which files it touches. Documentation and assets are low risk. Sync, database, security, budget and rules code is high risk and gets the most checking before it merges, whoever wrote it. AI makes it cheap to produce large changes, so I try to keep each pull request small and focused on one thing. That makes it much easier to tell what it changed and what it could break.
 
 ### Test on a real device before release
 
 Continuous integration is the automated gate, but it cannot prove everything. Actua has a release smoke-test checklist: install over the previous version without losing data, make an edit in Actua and confirm it appears in Actual, and the reverse, check that transfers stay paired, back up and restore. Some of the most important checks are simply using the app the way a person would.
 
-### Understand it before merging it
+### Understand the change, not every line
 
-My personal rule is simple. If I could not explain a change to someone else, it is not ready to merge. That does not mean I type every line myself. It means I know what the change does, why it is needed and what would break if it were wrong. When I cannot answer those questions, I ask the assistant to explain or I read the code until I can.
+I don't read every line an assistant writes, and I won't pretend to. What I do need to understand is the change itself: what it is supposed to do, why it is needed and what would break if it were wrong. If I can't answer those three questions in plain words, it isn't ready to merge.
+
+The answers come from evidence I can check without reading the code line by line: a plain-language explanation of the change, the tests and parity checks, the risk label, and trying the result myself. When those don't line up, or the change touches money, sync or security, that's my cue to slow down, ask more questions, or leave it for another day.
 
 ## The same rule in my other projects
 
@@ -125,6 +127,6 @@ That is the lesson I keep relearning with AI. A confident substitute is worse th
 
 ## Speed comes from the guardrails
 
-The surprising part is that this discipline is what makes AI fast. Because the parity tests exist, I can let an assistant attempt a sync change without fear. Because the rules are written down, its first attempt is usually closer. Because pull requests are small and labelled, reviewing them is quick.
+The surprising part is that this discipline is what makes AI fast. Because the parity tests exist, I can let an assistant attempt a sync change without fear. Because the rules are written down, its first attempt is usually closer. Because pull requests are small and labelled, checking them is quick.
 
 AI has changed how much I can build on my own. It has not changed who is responsible. When someone trusts Actua with their budget, a shop trusts its stock figures or a manager trusts a portfolio report, the person answerable for that is me, not the tool that helped write the code.
