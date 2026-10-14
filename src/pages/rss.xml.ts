@@ -9,6 +9,7 @@ export async function GET(context: APIContext) {
     title: `${profile.name}: The Lab`,
     description: 'Notes, experiments and things I am learning.',
     site: context.site!,
+    trailingSlash: false,
     items: posts.map((post) => ({
       title: post.data.title,
       description: post.data.description,
