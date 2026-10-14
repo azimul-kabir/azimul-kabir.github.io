@@ -1,0 +1,35 @@
+---
+// The path an AI-assisted change takes in Actua before it reaches a release.
+const steps = [
+  { title: 'Draft', text: 'An assistant writes a first version of the change.' },
+  { title: 'Rules', text: 'AGENTS.md says what must never break.' },
+  { title: 'Tests', text: 'Results are checked against Actual itself.' },
+  { title: 'Review', text: 'Risk labels decide how closely I read it.' },
+  { title: 'Device', text: 'The release checklist on a real phone.' },
+  { title: 'Release', text: 'Only then does it reach people.' },
+];
+---
+
+<figure class="not-prose my-10">
+  <ol class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+    {
+      steps.map((step, i) => (
+        <li class:list={['rounded-2xl border bg-surface p-4', i === steps.length - 1 ? 'border-accent' : 'border-line']}>
+          <span
+            class:list={[
+              'grid size-7 place-items-center rounded-full text-xs font-semibold',
+              i === 0 || i === steps.length - 1 ? 'bg-accent text-bg' : 'bg-accent-soft text-fg',
+            ]}
+          >
+            {i + 1}
+          </span>
+          <p class="mt-3 font-medium">{step.title}</p>
+          <p class="mt-1 text-sm leading-snug text-muted">{step.text}</p>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption class="mt-3 text-center text-sm text-muted">
+    How an AI-assisted change to Actua's sync or budget code reaches a release.
+  </figcaption>
+</figure>

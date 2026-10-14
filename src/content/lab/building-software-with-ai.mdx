@@ -6,9 +6,19 @@ tags: ['AI', 'Software engineering', 'Actua', 'Open source']
 draft: false
 ---
 
-I build [Actua](/projects/actua), [Harmony](/projects/harmony) and this website in the time left over from a full-time job in banking. I could not keep that many projects moving without AI coding assistants. I also would not trust any of them if the assistant were the one making the decisions.
+import { Image } from 'astro:assets';
+import GuardrailArt from '~/components/lab/GuardrailArt.astro';
+import HelpVsJudgment from '~/components/lab/HelpVsJudgment.astro';
+import GuardrailSteps from '~/components/lab/GuardrailSteps.astro';
+import inventoryDashboard from '~/assets/projects/inventory-management/dashboard.png';
+import pulseOverview from '~/assets/projects/credit-mis/overview.webp';
+import migratorPlan from '~/assets/projects/photo-migrator/gui-plan-review.png';
+
+I build [Actua](/projects/actua), [Harmony](/projects/harmony), a handful of [other projects](/projects) and this website in the time left over from a full-time job in banking. I could not keep that many projects moving without AI coding assistants. I also would not trust any of them if the assistant were the one making the decisions.
 
 This post is about where that line sits for me.
+
+<GuardrailArt />
 
 ## Where AI saves real time
 
@@ -20,6 +30,8 @@ The biggest win is not writing code faster. It is getting through the work aroun
 - **Second opinions.** A pull request on Actua can be sent to an AI reviewer by adding a label. It reads the diff as text and leaves comments. It catches things I miss, and occasionally points at things that are not problems at all.
 
 For a solo developer, that adds up to something like a small team's worth of throughput. But only if I stay the one who decides what is correct.
+
+<HelpVsJudgment />
 
 ## Where it gets things wrong
 
@@ -35,7 +47,9 @@ AI mistakes rarely look like mistakes. The code compiles, the explanation sounds
 
 ## How I keep my judgment in the loop
 
-None of these problems mean AI is not useful. They mean the safeguards have to live in the project, not in my hope that the assistant gets it right.
+None of these problems mean AI is not useful. They mean the safeguards have to live in the project, not in my hope that the assistant gets it right. Actua, which holds people's budgets, has the most of them.
+
+<GuardrailSteps />
 
 ### Write the rules down
 
@@ -62,8 +76,55 @@ Continuous integration is the automated gate, but it cannot prove everything. Ac
 
 My personal rule is simple. If I could not explain a change to someone else, it is not ready to merge. That does not mean I type every line myself. It means I know what the change does, why it is needed and what would break if it were wrong. When I cannot answer those questions, I ask the assistant to explain or I read the code until I can.
 
+## The same rule in my other projects
+
+Actua is the public example, but the same instinct runs through everything I build: a plausible guess is not good enough when the result matters. The rules that protect each project are written into the code, where a wrong change fails loudly instead of slipping through.
+
+### Inventory Management: numbers that always add up
+
+[Inventory Management](/projects/inventory-management) is a back office for small trading businesses, so its rules are about money and stock. Amounts are exact decimals. Stock lives in an immutable ledger with weighted-average costing, and it cannot silently go negative. A posted invoice is corrected by a reversal, never edited or deleted. Business rules sit in tested services, with pytest, Ruff and djlint in the loop.
+
+These are exactly the rules an assistant cannot guess from a single file. An "edit invoice" button looks like a harmless feature until you remember what it does to the audit trail.
+
+<figure>
+  <Image src={inventoryDashboard} alt="Inventory Management dashboard with sales, gross profit, purchases, cash, receivables and payables" widths={[640, 960, 1280]} sizes="(min-width: 768px) 720px, 100vw" class="rounded-xl border border-line" />
+  <figcaption>Inventory Management: every figure on the dashboard comes from a ledger that is never edited in place. Synthetic demo data.</figcaption>
+</figure>
+
+### Portfolio Pulse: the data stays at the office
+
+[Portfolio Pulse](/projects/credit-mis) is an internal credit-portfolio dashboard from my banking work. It turns month-end loan workbooks into eleven management views, and it processes everything locally so the data never leaves the office network.
+
+That sets a hard boundary for AI. An assistant can help with the code, the charts and the tests, but real customer data has no place in a prompt. The published screenshots use synthetic data. And because management decisions rest on these numbers, an automated audit walks through all eleven pages, the approval flow, month ordering, quarter selection and historical trend values.
+
+<figure>
+  <Image src={pulseOverview} alt="Portfolio Pulse executive overview with portfolio totals and asset-quality signals" widths={[640, 960, 1280]} sizes="(min-width: 768px) 720px, 100vw" class="rounded-xl border border-line" />
+  <figcaption>Portfolio Pulse: month-end workbooks processed entirely on the office network. Synthetic demonstration data.</figcaption>
+</figure>
+
+### Photo Migrator: see the plan before anything moves
+
+[Photo Migrator](/projects/photo-migrator) merges years of overlapping photo backups into one library. Duplicates are matched by size and SHA-256 hash, so nothing is merged on a guess. Originals are only ever read. And every import follows the same steps: review the plan, run a dry run, then import.
+
+It is the same posture I want with an AI change. Show me exactly what will happen before anything irreversible does.
+
+<figure>
+  <Image src={migratorPlan} alt="Photo Migrator plan review showing new files, files already in the library and duplicates" widths={[640, 960, 1280]} sizes="(min-width: 768px) 720px, 100vw" class="rounded-xl border border-line" />
+  <figcaption>Photo Migrator: nothing is copied until the plan has been reviewed and dry-run.</figcaption>
+</figure>
+
+### Daily Creative Spark: AI inside the product, on a short leash
+
+[Daily Creative Spark](/projects/creative-writing) makes printable writing worksheets for a young writer, and it uses AI as a feature: a fresh prompt can come from Gemini or Claude. But the requests never include the child's name or school; the name is only added on the home NAS afterwards. And a built-in bank of 70 prompts works offline, so the app never depends on a model being available.
+
+### Harmony: an honest gap beats a confident substitute
+
+[Harmony](/projects/harmony) downloads only the songs missing from a music library, and it checks each file's artist, title, version and duration before importing it. A live version, remix or cover is rejected, and a song that cannot be found stays marked as unavailable rather than being quietly replaced with something close.
+
+That is the lesson I keep relearning with AI. A confident substitute is worse than an honest gap.
+
 ## Speed comes from the guardrails
 
 The surprising part is that this discipline is what makes AI fast. Because the parity tests exist, I can let an assistant attempt a sync change without fear. Because the rules are written down, its first attempt is usually closer. Because pull requests are small and labelled, reviewing them is quick.
 
-AI has changed how much I can build on my own. It has not changed who is responsible. When someone trusts Actua with their budget, the person answerable for that is me, not the tool that helped write the code.
+AI has changed how much I can build on my own. It has not changed who is responsible. When someone trusts Actua with their budget, a shop trusts its stock figures or a manager trusts a portfolio report, the person answerable for that is me, not the tool that helped write the code.
