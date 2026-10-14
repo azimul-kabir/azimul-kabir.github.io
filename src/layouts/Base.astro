@@ -17,7 +17,9 @@ const { title, description = profile.description, type = 'website', published } 
 const fullTitle = title
   ? `${title} | ${profile.name}`
   : `${profile.name} | Banker & Open-Source Developer`;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+// Pages are built as /page.html (build.format 'file') but served without the extension,
+// so drop '.html' and 'index' to point at the URL visitors and search engines actually use.
+const canonical = new URL(Astro.url.pathname.replace(/(index)?\.html$/, ''), Astro.site);
 const ogImage = new URL('/og.png', Astro.site);
 
 const person = {
