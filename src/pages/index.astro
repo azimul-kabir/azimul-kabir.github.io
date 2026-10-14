@@ -6,12 +6,12 @@ import PostList from '~/components/PostList.astro';
 import { profile } from '~/data/profile';
 import { projects, featured } from '~/data/projects';
 import { github } from '~/data/social';
-import { labPosts, formatDate } from '~/lib/lab';
+import { blogPosts, formatDate } from '~/lib/blog';
 import { latestReleaseLabel, repoStats } from '~/lib/github';
 import actuaHero from '~/assets/actua-hero.png';
 import harmonyHero from '~/assets/harmony-hero.jpg';
 
-const posts = (await labPosts()).slice(0, 3);
+const posts = (await blogPosts()).slice(0, 3);
 const harmonyProject = projects.find((p) => p.slug === 'harmony')!;
 const others = projects.filter((p) => !p.featured && p !== harmonyProject).slice(0, 4);
 const [actua, harmony] = await Promise.all([repoStats(featured.repo!), repoStats(harmonyProject.repo!)]);
@@ -117,10 +117,10 @@ const nowItems = profile.now.map((item) =>
 
   {
     posts.length > 0 && (
-      <section class="container-page mt-20" aria-labelledby="lab">
+      <section class="container-page mt-20" aria-labelledby="blog">
         <div class="flex items-baseline justify-between">
-          <h2 id="lab" class="eyebrow">From the Lab</h2>
-          <a href="/lab" class="text-sm text-muted hover:text-fg">All notes →</a>
+          <h2 id="blog" class="eyebrow">From the blog</h2>
+          <a href="/blog" class="text-sm text-muted hover:text-fg">All posts →</a>
         </div>
         <div class="mt-4">
           <PostList posts={posts} />

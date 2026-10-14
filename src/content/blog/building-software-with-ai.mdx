@@ -1,0 +1,132 @@
+---
+title: 'AI Writes the Code. I Still Make the Calls.'
+description: 'How AI coding assistants fit into my workflow, where they save time, where they make mistakes, and why testing, reviewing and understanding the change still matter.'
+date: 2026-10-14
+tags: ['AI', 'Software engineering', 'Actua', 'Open source']
+draft: false
+---
+
+import { Image } from 'astro:assets';
+import GuardrailArt from '~/components/blog/GuardrailArt.astro';
+import HelpVsJudgment from '~/components/blog/HelpVsJudgment.astro';
+import GuardrailSteps from '~/components/blog/GuardrailSteps.astro';
+import inventoryDashboard from '~/assets/projects/inventory-management/dashboard.png';
+import pulseOverview from '~/assets/projects/credit-mis/overview.webp';
+import migratorPlan from '~/assets/projects/photo-migrator/gui-plan-review.png';
+
+I build [Actua](/projects/actua), [Harmony](/projects/harmony), a handful of [other projects](/projects) and this website in the time left over from a full-time job in banking. I could not keep that many projects moving without AI coding assistants. I also would not trust any of them if the assistant were the one making the decisions.
+
+This post is about where that line sits for me.
+
+<GuardrailArt />
+
+## Where AI saves real time
+
+The biggest win is not writing code faster. It is getting through the work around the code.
+
+- **Finding my way around.** Asking "where does this value come from?" across a large codebase, or a library I have never used, gets me to the right file in minutes instead of an evening.
+- **The boring parts.** Workflow files, build configuration, migrations, test fixtures, changelogs, release notes. Necessary, easy to get subtly wrong, and rarely the interesting part of the problem.
+- **First drafts.** A working first version of a screen, a script or a test gives me something concrete to review and reshape, which is faster than starting from an empty file.
+- **Second opinions.** A pull request on Actua can be sent to an AI reviewer by adding a label. It reads the diff as text and leaves comments. It catches things I miss, and occasionally points at things that are not problems at all.
+
+For a solo developer, that adds up to a meaningful increase in what I can get done. But only if I stay the one who decides what is correct.
+
+<HelpVsJudgment />
+
+## Where it gets things wrong
+
+AI mistakes rarely look like mistakes. The code compiles, the explanation sounds confident and the change is often 90% right. The small part it gets wrong can be where the real trouble starts.
+
+**It acts on the most likely reading, not the right one.** When I asked for my nickname to change from Apu to AziM on this site, the first version changed my full name too. A sensible guess, and wrong. It was a two-minute fix because I read the result before it went live.
+
+**It assumes the obvious cause.** My website was showing an old Actua version after a release. The obvious explanation was that the daily rebuild had not run yet. The real cause was that azimulkabir.com is served by Cloudflare Pages, which only rebuilds on a code push, while the daily rebuild only refreshed the GitHub Pages copy. Finding that meant comparing what each host was actually serving. Fixing the first explanation would have changed nothing.
+
+**It does not know which rules are sacred.** A finance app has invariants that look like ordinary code: amounts are stored as whole cents, never floating-point numbers; every synchronised change has to go through the same message log so other devices can merge it; dates and deletions have to be encoded exactly the way Actual expects. An assistant can write perfectly reasonable code that quietly breaks one of these, and the bug will not show up until someone's budget stops syncing.
+
+**Its knowledge has a date on it.** Library versions, APIs and platform rules move. An answer can be correct for last year's version of a tool. Before upgrading anything, I still read the release notes myself.
+
+## How I keep my judgment in the loop
+
+None of these problems mean AI is not useful. They mean the safeguards have to live in the project, not in my hope that the assistant gets it right. Actua, which holds people's budgets, has the most of them.
+
+<GuardrailSteps />
+
+### Write the rules down
+
+Actua has an `AGENTS.md` file that every contributor, human or AI, is expected to read first. It explains how the code is organised and lists the data and sync rules that must not be broken: integer cents, routing changes through the existing writers, never logging credentials or real financial data, using only synthetic test data. Writing these down helped me as much as the assistant. Rules that only exist in my head are rules I will eventually forget.
+
+### Let the tests decide, not the explanation
+
+"This should work" is not evidence. For Actua's most important behaviour, the tests compare against Actual itself rather than against my own idea of what Actual does:
+
+- The **rules** and **budget month** tests generate expected results from Actual's own engine and replay them through Actua. If the two disagree, the build fails.
+- The **two-client** test makes the same edits through Actual and through Actua against a throwaway server, syncs them, and compares the rows.
+
+When an assistant changes sync or budget code, it does not matter how convincing its explanation is. Either the numbers match Actual or they do not.
+
+### Review harder where the stakes are higher
+
+Every Actua pull request is labelled automatically by which files it touches. Documentation and assets are low risk. Sync, database, security, budget and rules code is high risk and gets the most checking before it merges, whoever wrote it. AI makes it cheap to produce large changes, so I try to keep each pull request small and focused on one thing. That makes it much easier to tell what it changed and what it could break.
+
+### Test on a real device before release
+
+Continuous integration is the automated gate, but it cannot prove everything. Actua has a release smoke-test checklist: install over the previous version without losing data, make an edit in Actua and confirm it appears in Actual, and the reverse, check that transfers stay paired, back up and restore. Some of the most important checks are simply using the app the way a person would.
+
+### Understand the change, not every line
+
+I don't read every line an assistant writes, and I won't pretend to. What I do need to understand is the change itself: what it is supposed to do, why it is needed and what would break if it were wrong. If I can't answer those three questions in plain words, it isn't ready to merge.
+
+The answers come from evidence I can check without reading the code line by line: a plain-language explanation of the change, the tests and parity checks, the risk label, and trying the result myself. When those don't line up, or the change touches money, sync or security, that's my cue to slow down, ask more questions, or leave it for another day.
+
+## The same rule in my other projects
+
+Actua is the public example, but the same instinct runs through everything I build: a plausible guess is not good enough when the result matters. The rules that protect each project are written into the code, where a wrong change fails loudly instead of slipping through.
+
+### Inventory Management: numbers that always add up
+
+[Inventory Management](/projects/inventory-management) is a back office for small trading businesses, so its rules are about money and stock. Amounts are exact decimals. Stock lives in an immutable ledger with weighted-average costing, and it cannot silently go negative. A posted invoice is corrected by a reversal, never edited or deleted. Business rules sit in tested services, with pytest, Ruff and djlint in the loop.
+
+These are exactly the rules an assistant cannot guess from a single file. An "edit invoice" button looks like a harmless feature until you remember what it does to the audit trail.
+
+<figure>
+  <Image src={inventoryDashboard} alt="Inventory Management dashboard with sales, gross profit, purchases, cash, receivables and payables" widths={[640, 960, 1280]} sizes="(min-width: 768px) 720px, 100vw" class="rounded-xl border border-line" />
+  <figcaption>Inventory Management: every figure on the dashboard comes from a ledger that is never edited in place. Synthetic demo data.</figcaption>
+</figure>
+
+### Portfolio Pulse: the data stays at the office
+
+[Portfolio Pulse](/projects/credit-mis) is an internal credit-portfolio dashboard from my banking work. It turns month-end loan workbooks into eleven management views, and it processes everything locally so the data never leaves the office network.
+
+That sets a hard boundary for AI. An assistant can help with the code, the charts and the tests, but real customer data has no place in a prompt. The published screenshots use synthetic data. And because management decisions rest on these numbers, an automated audit walks through all eleven pages, the approval flow, month ordering, quarter selection and historical trend values.
+
+<figure>
+  <Image src={pulseOverview} alt="Portfolio Pulse executive overview with portfolio totals and asset-quality signals" widths={[640, 960, 1280]} sizes="(min-width: 768px) 720px, 100vw" class="rounded-xl border border-line" />
+  <figcaption>Portfolio Pulse: month-end workbooks processed entirely on the office network. Synthetic demonstration data.</figcaption>
+</figure>
+
+### Photo Migrator: see the plan before anything moves
+
+[Photo Migrator](/projects/photo-migrator) merges years of overlapping photo backups into one library. Duplicates are matched by size and SHA-256 hash, so nothing is merged on a guess. Originals are only ever read. And every import follows the same steps: review the plan, run a dry run, then import.
+
+It is the same posture I want with an AI change. Show me exactly what will happen before anything irreversible does.
+
+<figure>
+  <Image src={migratorPlan} alt="Photo Migrator plan review showing new files, files already in the library and duplicates" widths={[640, 960, 1280]} sizes="(min-width: 768px) 720px, 100vw" class="rounded-xl border border-line" />
+  <figcaption>Photo Migrator: nothing is copied until the plan has been reviewed and dry-run.</figcaption>
+</figure>
+
+### Daily Creative Spark: AI inside the product, on a short leash
+
+[Daily Creative Spark](/projects/creative-writing) makes printable writing worksheets for a young writer, and it uses AI as a feature: a fresh prompt can come from Gemini or Claude. But the requests never include the child's name or school; the name is only added on the home NAS afterwards. And a built-in bank of 70 prompts works offline, so the app never depends on a model being available.
+
+### Harmony: an honest gap beats a confident substitute
+
+[Harmony](/projects/harmony) downloads only the songs missing from a music library, and it checks each file's artist, title, version and duration before importing it. A live version, remix or cover is rejected, and a song that cannot be found stays marked as unavailable rather than being quietly replaced with something close.
+
+That is the lesson I keep relearning with AI. A confident substitute is worse than an honest gap.
+
+## Speed comes from the guardrails
+
+The surprising part is that this discipline is what makes AI fast. Because the parity tests exist, I can let an assistant attempt a sync change without fear. Because the rules are written down, its first attempt is usually closer. Because pull requests are small and labelled, checking them is quick.
+
+AI has changed how much I can build on my own. It has not changed who is responsible. When someone trusts Actua with their budget, a shop trusts its stock figures or a manager trusts a portfolio report, the person answerable for that is me, not the tool that helped write the code.

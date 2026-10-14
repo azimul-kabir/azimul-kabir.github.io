@@ -1,0 +1,121 @@
+---
+// Header illustration for the "Building Software with AI" post: an AI-drafted change passes
+// three gates (written rules, tests, review) and only what survives reaches the shipped app.
+// Drawn with the site's colour tokens so it follows the light and dark themes.
+---
+
+<figure class="not-prose my-10">
+  <svg
+    viewBox="0 0 720 260"
+    class="h-auto w-full"
+    role="img"
+    aria-labelledby="guardrail-art-title"
+  >
+    <title id="guardrail-art-title">
+      An AI-drafted change passes through three gates, written rules, tests and review, before it ships. Some guesses
+      are stopped at each gate.
+    </title>
+    <defs>
+      <pattern id="ga-dots" width="16" height="16" patternUnits="userSpaceOnUse">
+        <circle cx="2" cy="2" r="1" style="fill: var(--line)" />
+      </pattern>
+    </defs>
+
+    <rect x="0" y="0" width="720" height="260" rx="24" style="fill: var(--surface); stroke: var(--line)" />
+    <rect x="1" y="1" width="718" height="258" rx="23" fill="url(#ga-dots)" opacity="0.7" />
+
+    <!-- Flow line -->
+    <path d="M178 130 H548" style="stroke: var(--muted)" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round" />
+
+    <!-- Draft card -->
+    <g>
+      <rect x="28" y="56" width="150" height="148" rx="16" style="fill: var(--bg); stroke: var(--line)" stroke-width="1.5" />
+      <circle cx="48" cy="76" r="4" style="fill: var(--line)" />
+      <circle cx="62" cy="76" r="4" style="fill: var(--line)" />
+      <circle cx="76" cy="76" r="4" style="fill: var(--line)" />
+      <g stroke-linecap="round" stroke-width="7">
+        <path d="M48 104 H120" style="stroke: var(--accent)" opacity="0.55" />
+        <path d="M60 124 H150" style="stroke: var(--muted)" opacity="0.35" />
+        <path d="M60 144 H132" style="stroke: var(--muted)" opacity="0.35" />
+        <path d="M48 164 H104" style="stroke: var(--accent)" opacity="0.55" />
+        <path d="M60 184 H140" style="stroke: var(--muted)" opacity="0.35" />
+      </g>
+      <!-- Sparkle: the AI draft -->
+      <path
+        d="M172 40 C174 52 178 56 190 58 C178 60 174 64 172 76 C170 64 166 60 154 58 C166 56 170 52 172 40 Z"
+        style="fill: var(--accent)"
+      />
+      <path
+        d="M196 72 C197 77 199 79 204 80 C199 81 197 83 196 88 C195 83 193 81 188 80 C193 79 195 77 196 72 Z"
+        style="fill: var(--accent)"
+        opacity="0.6"
+      />
+    </g>
+
+    <!-- Three gates -->
+    <g>
+      <rect x="236" y="44" width="52" height="172" rx="26" style="fill: var(--bg); stroke: var(--line)" stroke-width="1.5" />
+      <rect x="336" y="44" width="52" height="172" rx="26" style="fill: var(--bg); stroke: var(--line)" stroke-width="1.5" />
+      <rect x="436" y="44" width="52" height="172" rx="26" style="fill: var(--bg); stroke: var(--line)" stroke-width="1.5" />
+
+      <circle cx="262" cy="130" r="20" style="fill: var(--surface); stroke: var(--accent)" stroke-width="2" />
+      <circle cx="362" cy="130" r="20" style="fill: var(--surface); stroke: var(--accent)" stroke-width="2" />
+      <circle cx="462" cy="130" r="20" style="fill: var(--surface); stroke: var(--accent)" stroke-width="2" />
+
+      <!-- Rules: a written page -->
+      <g style="stroke: var(--fg)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M255 119 H266 L271 124 V141 H255 Z" />
+        <path d="M259 128 H267 M259 133 H267 M259 138 H264" />
+      </g>
+      <!-- Tests: a check in a box -->
+      <g style="stroke: var(--fg)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="352" y="120" width="20" height="20" rx="4" />
+        <path d="M356 130 L360 134 L368 125" />
+      </g>
+      <!-- Review: an eye -->
+      <g style="stroke: var(--fg)" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M450 130 C454 123 458 120 462 120 C466 120 470 123 474 130 C470 137 466 140 462 140 C458 140 454 137 450 130 Z" />
+        <circle cx="462" cy="130" r="3.5" />
+      </g>
+    </g>
+
+    <!-- Guesses moving along the line -->
+    <circle cx="212" cy="130" r="5" style="fill: var(--accent)" />
+    <circle cx="312" cy="130" r="5" style="fill: var(--accent)" />
+    <circle cx="412" cy="130" r="5" style="fill: var(--accent)" />
+    <circle cx="512" cy="130" r="5" style="fill: var(--accent)" />
+
+    <!-- Guesses stopped at each gate -->
+    <g style="stroke: var(--muted)" stroke-width="1.8" stroke-linecap="round" opacity="0.8">
+      <circle cx="262" cy="234" r="6" fill="none" />
+      <path d="M259 231 L265 237 M265 231 L259 237" />
+      <circle cx="362" cy="234" r="6" fill="none" />
+      <path d="M359 231 L365 237 M365 231 L359 237" />
+      <circle cx="462" cy="234" r="6" fill="none" />
+      <path d="M459 231 L465 237 M465 231 L459 237" />
+      <path d="M262 218 V226 M362 218 V226 M462 218 V226" stroke-dasharray="2 4" />
+    </g>
+
+    <!-- Shipped -->
+    <g>
+      <rect x="548" y="56" width="144" height="148" rx="16" style="fill: var(--bg); stroke: var(--line)" stroke-width="1.5" />
+      <circle cx="620" cy="112" r="30" style="fill: var(--accent-soft); stroke: var(--accent)" stroke-width="2" />
+      <path
+        d="M607 112 L616 121 L634 103"
+        fill="none"
+        style="stroke: var(--accent)"
+        stroke-width="4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <g stroke-linecap="round" stroke-width="7">
+        <path d="M584 164 H656" style="stroke: var(--muted)" opacity="0.35" />
+        <path d="M596 182 H644" style="stroke: var(--muted)" opacity="0.35" />
+      </g>
+    </g>
+  </svg>
+  <figcaption class="mt-3 text-center text-sm text-muted">
+    An AI draft only ships after it gets past the written rules, the tests and a review. Each gate stops a few
+    confident guesses.
+  </figcaption>
+</figure>

@@ -1,7 +1,7 @@
 import { getCollection } from 'astro:content';
 
-export async function labPosts() {
-  const posts = await getCollection('lab', ({ data }) => import.meta.env.DEV || !data.draft);
+export async function blogPosts() {
+  const posts = await getCollection('blog', ({ data }) => import.meta.env.DEV || !data.draft);
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 

@@ -1,0 +1,21 @@
+---
+import Base from '~/layouts/Base.astro';
+import PostList from '~/components/PostList.astro';
+import { blogPosts } from '~/lib/blog';
+
+const posts = await blogPosts();
+---
+
+<Base title="Blog" description="Writing by Azimul Kabir Apu about building software, self-hosting, open source and practical AI.">
+  <div class="container-page pt-12 sm:pt-16">
+    <p class="eyebrow">Blog</p>
+    <h1 class="mt-4 font-serif text-4xl font-semibold tracking-tight sm:text-5xl">Building, learning and shipping</h1>
+    <p class="mt-4 max-w-2xl text-muted">
+      Writing about the software I build, self-hosting, open source and practical uses of AI.{' '}
+      <a href="/rss.xml" class="link">Subscribe via RSS</a>.
+    </p>
+    <div class="mt-10">
+      {posts.length ? <PostList posts={posts} /> : <p class="text-muted">The first posts are on their way.</p>}
+    </div>
+  </div>
+</Base>
