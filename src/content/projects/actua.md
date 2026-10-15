@@ -35,20 +35,21 @@ gallery:
 
 ## What it is
 
-[Actual Budget](https://actualbudget.org/) is a local-first, self-hostable envelope budgeting app. Actua brings it to
-Android with a native Material You interface. It connects directly to your own Actual server, keeps a local copy of
-your budget for offline use, and syncs changes back with Actual's encrypted sync.
+[Actual Budget](https://actualbudget.org/) is a local-first, self-hostable budgeting app with envelope and tracking
+budgets. Actua brings it to Android with a native Material You interface. It connects directly to your own Actual
+server, keeps a local copy of your budget for offline use, and syncs changes back with Actual's encrypted sync.
 
 ## What it does
 
-- Budgeting, category targets, budget automations and moving money between categories
+- Envelope and tracking budgets, category targets, budget automations and moving money between categories
 - Transactions, splits, transfers, reconciliation and scheduled transactions with a bills calendar
 - Accounts, credit cards and payment reminders
 - Bank sync through your Actual server, including SimpleFIN and GoCardless
 - Actual's dashboard and saved custom reports, with drill-down to transactions
 - Rules and automatic categorisation, payee management, tags and global search
-- Imports from CSV, XLSX, PDF, SMS and notifications, plus Tasker intents
-- Password and OpenID Connect login, automatic local backups and a home-screen widget
+- Imports from CSV, XLSX, PDF, SMS and bank notifications, plus a Tasker plugin, with captured transactions
+  reviewed before they are saved
+- Password and OpenID Connect login, automatic local backups and home-screen widgets
 
 ## How it's built
 
