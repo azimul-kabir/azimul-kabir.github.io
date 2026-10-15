@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import ThemedImage from '~/components/ThemedImage.astro';
 import type { Project } from '~/data/projects';
 import { repoStats } from '~/lib/github';
 
@@ -14,8 +14,9 @@ const href = `/projects/${project.slug}`;
 <article class="card relative flex h-full flex-col overflow-hidden">
   {
     project.image && (
-      <Image
+      <ThemedImage
         src={project.image.src}
+        srcDark={project.image.srcDark}
         alt={project.image.alt}
         widths={[480, 720, 960]}
         sizes="(min-width: 640px) 360px, 100vw"

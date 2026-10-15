@@ -8,13 +8,16 @@ draft: false
 cover: actua
 ---
 
-import { Image } from 'astro:assets';
 import ActuaArt from '~/components/blog/ActuaArt.astro';
 import ActuaTimeline from '~/components/blog/ActuaTimeline.astro';
 import BuildLoop from '~/components/blog/BuildLoop.astro';
-import budgetShot from '~/assets/projects/actua/budget.png';
-import transactionsShot from '~/assets/projects/actua/transactions.png';
-import reportsShot from '~/assets/projects/actua/reports.png';
+import ThemedImage from '~/components/ThemedImage.astro';
+import budgetShot from '~/assets/projects/actua/light/budget.png';
+import budgetShotDark from '~/assets/projects/actua/dark/budget.png';
+import transactionsShot from '~/assets/projects/actua/light/transactions.png';
+import transactionsShotDark from '~/assets/projects/actua/dark/transactions.png';
+import reportsShot from '~/assets/projects/actua/light/reports.png';
+import reportsShotDark from '~/assets/projects/actua/dark/reports.png';
 
 [Actua](/projects/actua) has a slightly unusual origin: I am mostly an iPhone user.
 
@@ -54,9 +57,9 @@ Transactions need to feel quick and predictable. Account balances need to be cle
 
 <figure class="not-prose my-10">
   <div class="grid grid-cols-3 gap-3 sm:gap-4">
-    <Image src={budgetShot} alt="Actua's budget screen with category balances and Ready to Budget" widths={[240, 360, 480]} sizes="(min-width: 768px) 230px, 30vw" class="w-full rounded-xl border border-line" />
-    <Image src={transactionsShot} alt="Actua's transactions list grouped by date" widths={[240, 360, 480]} sizes="(min-width: 768px) 230px, 30vw" class="w-full rounded-xl border border-line" />
-    <Image src={reportsShot} alt="Actua's reports screen with a monthly income versus expenses chart" widths={[240, 360, 480]} sizes="(min-width: 768px) 230px, 30vw" class="w-full rounded-xl border border-line" />
+    <ThemedImage src={budgetShot} srcDark={budgetShotDark} alt="Actua's budget screen with category balances and Ready to Budget" widths={[240, 360, 480]} sizes="(min-width: 768px) 230px, 30vw" class="w-full rounded-xl border border-line" />
+    <ThemedImage src={transactionsShot} srcDark={transactionsShotDark} alt="Actua's transactions list for a credit card account, grouped by date" widths={[240, 360, 480]} sizes="(min-width: 768px) 230px, 30vw" class="w-full rounded-xl border border-line" />
+    <ThemedImage src={reportsShot} srcDark={reportsShotDark} alt="Actua's reports screen with spending by category" widths={[240, 360, 480]} sizes="(min-width: 768px) 230px, 30vw" class="w-full rounded-xl border border-line" />
   </div>
   <figcaption class="mt-3 text-center text-sm text-muted">Budget, transactions and reports in Actua.</figcaption>
 </figure>
@@ -85,7 +88,7 @@ That is what makes open source interesting to me. The project is never really fi
 
 ## Where Actua is today
 
-Actua is now on version 1.8, with 70 releases since the first alpha. You can install it from Google Play, download it from GitHub, or follow updates with Obtainium.
+Actua is now on version 1.8, with 70 releases since the first alpha. It is available to everyone on [Google Play](https://play.google.com/store/apps/details?id=com.azimulkabir.actua), and you can also download it from GitHub or follow updates with Obtainium.
 
 There is still a lot I want to improve. I want Actua to feel fast, polished, familiar and genuinely useful every time someone opens it. I also want to keep it open and accessible, with features available to everyone rather than slowly turning into a collection of paid unlocks.
 

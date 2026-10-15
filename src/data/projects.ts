@@ -1,5 +1,6 @@
 import type { ImageMetadata } from 'astro';
 import actuaHero from '~/assets/actua-hero.png';
+import actuaHeroDark from '~/assets/actua-hero-dark.png';
 import creativeSparkHero from '~/assets/creative-spark-hero.png';
 import creditMisHero from '~/assets/credit-mis-hero.webp';
 import actualiHero from '~/assets/actuali-hero.jpg';
@@ -22,7 +23,8 @@ export type Project = {
   /** A project owned by someone else that I contribute to. */
   contribution?: boolean;
   /** Screenshot shown at the top of the project card. */
-  image?: { src: ImageMetadata; alt: string };
+  /** srcDark, if set, is shown instead of src in the dark theme. */
+  image?: { src: ImageMetadata; srcDark?: ImageMetadata; alt: string };
 };
 
 export const projects: Project[] = [
@@ -36,8 +38,8 @@ export const projects: Project[] = [
     links: [
       { label: 'Website', href: 'https://actua.azimulkabir.com' },
       {
-        label: 'Google Play testing',
-        href: 'https://groups.google.com/g/actua-testers',
+        label: 'Google Play',
+        href: 'https://play.google.com/store/apps/details?id=com.azimulkabir.actua',
         primary: true,
       },
       {
@@ -54,7 +56,8 @@ export const projects: Project[] = [
     featured: true,
     image: {
       src: actuaHero,
-      alt: 'Actua for Android showing the transactions, budget and reports screens',
+      srcDark: actuaHeroDark,
+      alt: 'Actua, a native Android client for Actual Budget, now on Google Play: phones showing the accounts, budget and spending reports screens',
     },
   },
   {

@@ -7,24 +7,30 @@ facts:
 gallery:
   - layout: phone
     items:
-      - src: ../../assets/projects/actua/budget.png
+      - src: ../../assets/projects/actua/light/home.png
+        dark: ../../assets/projects/actua/dark/home.png
+        alt: Home screen with Ready to Budget, favourite categories and accounts, and upcoming bills
+      - src: ../../assets/projects/actua/light/budget.png
+        dark: ../../assets/projects/actua/dark/budget.png
         alt: Budget screen with category balances, targets and Ready to Budget
-        caption: Plan every category, down to the cent.
-      - src: ../../assets/projects/actua/transactions.png
-        alt: Transactions list grouped by date with categories and accounts
-        caption: Every transaction, synced with your server.
-      - src: ../../assets/projects/actua/reports.png
-        alt: Reports overview with a monthly income versus expenses chart
-        caption: Actual's reports and dashboards.
-      - src: ../../assets/projects/actua/bills-calendar.png
-        alt: Bills calendar showing upcoming, overdue and paid scheduled transactions
-        caption: A calendar of upcoming bills.
-      - src: ../../assets/projects/actua/accounts.png
-        alt: Accounts screen with on-budget and off-budget balances
-        caption: All your accounts in one place.
-      - src: ../../assets/projects/actua/rules.png
+      - src: ../../assets/projects/actua/light/add-transaction.png
+        dark: ../../assets/projects/actua/dark/add-transaction.png
+        alt: Add transaction screen with payee, category, account, date and notes
+      - src: ../../assets/projects/actua/light/accounts.png
+        dark: ../../assets/projects/actua/dark/accounts.png
+        alt: Accounts screen with favourites, on-budget and off-budget balances
+      - src: ../../assets/projects/actua/light/reports.png
+        dark: ../../assets/projects/actua/dark/reports.png
+        alt: Spending by category report with a donut chart
+      - src: ../../assets/projects/actua/light/net-worth.png
+        dark: ../../assets/projects/actua/dark/net-worth.png
+        alt: Net worth and cash flow charts
+      - src: ../../assets/projects/actua/light/bills-calendar.png
+        dark: ../../assets/projects/actua/dark/bills-calendar.png
+        alt: Bills calendar with upcoming, overdue and paid bills
+      - src: ../../assets/projects/actua/light/rules.png
+        dark: ../../assets/projects/actua/dark/rules.png
         alt: Rules screen for automatic categorisation
-        caption: Rules that categorise for you.
 ---
 
 ## What it is
@@ -55,8 +61,9 @@ recomposition audits and a release smoke test.
 
 Development happens on [GitHub](https://github.com/azimul-kabir/actua), with issues, pull requests and a public
 changelog. The first alpha shipped in early September 2026, and after a long run of beta builds for testers, 1.0.0
-was released on 25 September 2026. Join the [Google Play testing group](https://groups.google.com/g/actua-testers),
-download APKs from [GitHub Releases](https://github.com/azimul-kabir/actua/releases), or install through
+was released on 25 September 2026. Actua is now available to everyone on
+[Google Play](https://play.google.com/store/apps/details?id=com.azimulkabir.actua). You can also download APKs from
+[GitHub Releases](https://github.com/azimul-kabir/actua/releases) or install through
 [Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/azimul-kabir/actua).
 For help and discussion, join the [Actua Discord](https://discord.gg/FhedEyP97f).
 
