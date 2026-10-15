@@ -17,6 +17,21 @@
   color-scheme: light;
 }
 
+/* The same dark theme as a real media query: browsers without JavaScript get it, and dark-mode
+   extensions such as Noir can see the site already has one. An explicit light choice still wins. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #09090b;
+    --surface: #151518;
+    --fg: #f4f4f5;
+    --muted: #a1a1aa;
+    --line: #27272a;
+    --accent: #86efac;
+    --accent-soft: #14532d;
+    color-scheme: dark;
+  }
+}
+
 [data-theme='dark'] {
   --bg: #09090b;
   --surface: #151518;
