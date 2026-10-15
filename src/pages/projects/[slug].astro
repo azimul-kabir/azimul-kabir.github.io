@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import ThemedImage from '~/components/ThemedImage.astro';
 import { getEntry, render } from 'astro:content';
 import Base from '~/layouts/Base.astro';
 import { projects } from '~/data/projects';
@@ -79,8 +80,9 @@ const layouts = {
     {
       project.image && (
         <div class="container-wide mt-12">
-          <Image
+          <ThemedImage
             src={project.image.src}
+            srcDark={project.image.srcDark}
             alt={project.image.alt}
             widths={[640, 1024, 1600]}
             sizes="(min-width: 1024px) 976px, 100vw"
@@ -124,15 +126,20 @@ const layouts = {
               <div class:list={['grid gap-4', layouts[group.layout].grid]}>
                 {group.items.map((item) => (
                   <figure>
-                    <a href={item.src.src} class="block" aria-label={`Open full-size image: ${item.alt}`}>
-                      <Image
-                        src={item.src}
-                        alt={item.alt}
-                        widths={layouts[group.layout].widths}
-                        sizes={layouts[group.layout].sizes}
-                        class="w-full rounded-xl border border-line"
-                      />
-                    </a>
+                    {[
+                      { src: item.src, theme: item.dark ? 'dark:hidden' : '' },
+                      ...(item.dark ? [{ src: item.dark, theme: 'hidden dark:block' }] : []),
+                    ].map((v) => (
+                      <a href={v.src.src} class:list={['block', v.theme]} aria-label={`Open full-size image: ${item.alt}`}>
+                        <Image
+                          src={v.src}
+                          alt={item.alt}
+                          widths={layouts[group.layout].widths}
+                          sizes={layouts[group.layout].sizes}
+                          class="w-full rounded-xl border border-line"
+                        />
+                      </a>
+                    ))}
                     {item.caption && <figcaption class="mt-2 text-sm text-muted">{item.caption}</figcaption>}
                   </figure>
                 ))}

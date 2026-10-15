@@ -3,12 +3,12 @@ import { Image } from 'astro:assets';
 import Base from '~/layouts/Base.astro';
 import ProjectCard from '~/components/ProjectCard.astro';
 import PostList from '~/components/PostList.astro';
+import ThemedImage from '~/components/ThemedImage.astro';
 import { profile } from '~/data/profile';
 import { projects, featured } from '~/data/projects';
 import { github } from '~/data/social';
 import { blogPosts, formatMonth } from '~/lib/blog';
 import { latestReleaseLabel, repoStats } from '~/lib/github';
-import actuaHero from '~/assets/actua-hero.png';
 import harmonyHero from '~/assets/harmony-hero.jpg';
 import portrait from '~/assets/azim.jpg';
 
@@ -81,12 +81,13 @@ const nowItems = profile.now.map((item) =>
     <div class="mt-4 grid gap-4 md:grid-cols-2">
       {
         [
-          { href: '/projects/actua', name: 'Actua', image: actuaHero, alt: 'Actua for Android showing the transactions, budget and reports screens', bg: 'bg-[#2a0f8a]', stats: actua, summary: featured.summary },
-          { href: '/projects/harmony', name: 'Harmony', image: harmonyHero, alt: harmonyProject.image!.alt, bg: 'bg-[#0b1215]', stats: harmony, summary: harmonyProject.summary },
+          { href: '/projects/actua', name: 'Actua', image: featured.image!.src, imageDark: featured.image!.srcDark, alt: featured.image!.alt, bg: 'bg-[#ede7fb] dark:bg-[#2a0f8a]', stats: actua, summary: featured.summary },
+          { href: '/projects/harmony', name: 'Harmony', image: harmonyHero, imageDark: undefined, alt: harmonyProject.image!.alt, bg: 'bg-[#0b1215]', stats: harmony, summary: harmonyProject.summary },
         ].map((f) => (
           <a href={f.href} class="card flex flex-col overflow-hidden p-0">
-            <Image
+            <ThemedImage
               src={f.image}
+              srcDark={f.imageDark}
               alt={f.alt}
               widths={[480, 720, 1000]}
               sizes="(min-width: 1024px) 490px, (min-width: 768px) 50vw, 100vw"

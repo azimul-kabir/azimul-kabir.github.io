@@ -32,7 +32,15 @@ const projects = defineCollection({
             title: z.string().optional(),
             /** wide: two per row; phone: four portrait shots per row; full: one per row. */
             layout: z.enum(['wide', 'phone', 'full']).default('wide'),
-            items: z.array(z.object({ src: image(), alt: z.string(), caption: z.string().optional() })),
+            items: z.array(
+              z.object({
+                src: image(),
+                /** Optional dark-theme version, shown instead of src in the dark theme. */
+                dark: image().optional(),
+                alt: z.string(),
+                caption: z.string().optional(),
+              }),
+            ),
           }),
         )
         .default([]),
