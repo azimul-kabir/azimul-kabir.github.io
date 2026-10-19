@@ -3,7 +3,7 @@ tagline: A native Android client for Actual Budget, built in the open.
 facts:
   - { label: Platform, value: Android 9+ }
   - { label: Built with, value: Kotlin · Jetpack Compose }
-  - { label: License, value: MIT }
+  - { label: License, value: GPLv3 }
 gallery:
   - layout: phone
     items:
@@ -41,13 +41,14 @@ server, keeps a local copy of your budget for offline use, and syncs changes bac
 
 ## What it does
 
+- Standalone on-device budgets with no server, plus optional Google Drive backup with client-side encryption
 - Envelope and tracking budgets, category targets, budget automations and moving money between categories
 - Transactions, splits, transfers, reconciliation and scheduled transactions with a bills calendar
-- Accounts, credit cards and payment reminders
+- Accounts with collapsible groups, credit cards and payment reminders
 - Bank sync through your Actual server, including SimpleFIN and GoCardless
-- Actual's dashboard and saved custom reports, with drill-down to transactions
+- Actual's dashboard and saved custom reports, a custom report builder, and drill-down to transactions
 - Rules and automatic categorisation, payee management, tags and global search
-- Imports from CSV, XLSX, PDF, SMS and bank notifications, plus a Tasker plugin, with captured transactions
+- Imports from CSV, XLSX, PDF, OFX, QFX, QIF, CAMT.053, SMS and bank notifications, plus a Tasker plugin, with captured transactions
   reviewed before they are saved
 - Password and OpenID Connect login, automatic local backups and home-screen widgets
 
@@ -62,7 +63,7 @@ recomposition audits and a release smoke test.
 
 Development happens on [GitHub](https://github.com/azimul-kabir/actua), with issues, pull requests and a public
 changelog. The first alpha shipped in early September 2026, and after a long run of beta builds for testers, 1.0.0
-was released on 25 September 2026. Actua is now available to everyone on
+was released on 25 September 2026, and 2.0.0 followed on 19 October 2026 with standalone budgets, Google Drive backup and a move to the GPLv3 licence. Actua is now available to everyone on
 [Google Play](https://play.google.com/store/apps/details?id=com.azimulkabir.actua). You can also download APKs from
 [GitHub Releases](https://github.com/azimul-kabir/actua/releases) or install through
 [Obtainium](https://apps.obtainium.imranr.dev/redirect?r=obtainium://add/https://github.com/azimul-kabir/actua).
