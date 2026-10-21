@@ -4,7 +4,7 @@ import { z } from 'astro/zod';
 
 const blog = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
@@ -13,6 +13,8 @@ const blog = defineCollection({
     draft: z.boolean().default(false),
     /** Header illustration reused as the post's thumbnail in post lists (see PostCover.astro). */
     cover: z.enum(['guardrail', 'actua']).optional(),
+    /** Image thumbnail for post lists, used when no built-in cover illustration applies. */
+    thumb: image().optional(),
   }),
 });
 
