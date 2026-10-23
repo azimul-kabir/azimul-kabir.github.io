@@ -1,0 +1,71 @@
+---
+title: 'Expected Credit Loss Is Coming to Bangladesh Banks. Here Is What Changes.'
+description: 'Bangladesh Bank has issued an IFRS 9-based expected credit loss guideline, effective 1 January 2028. A plain-language look at the three stages, what changes for provisioning, and where the data work really is.'
+date: 2026-10-23
+tags: ['Banking', 'IFRS 9', 'Credit risk', 'Bangladesh']
+draft: false
+thumb: ../../assets/blog/ecl-ifrs9-bangladesh-banks-2028/cover.svg
+---
+
+import { Image } from 'astro:assets';
+import cover from '~/assets/blog/ecl-ifrs9-bangladesh-banks-2028/cover.svg';
+
+<Image src={cover} alt="Three rising bars labelled Stage 1, Stage 2 and Stage 3 with the date 1 January 2028" widths={[640, 960, 1200]} sizes="(min-width: 768px) 720px, 100vw" class="rounded-xl border border-line" />
+
+I work in banking, so I spend a lot of time around loan data. In March 2026 Bangladesh Bank issued a guideline that will change what that data has to answer. This post is my plain-language reading of it, written for colleagues and for anyone outside banking who is curious. It is my own view, not an official position.
+
+## The shift in one sentence
+
+Today, provisions in Bangladesh mostly follow an **incurred loss** approach: a bank sets money aside once a loan has visibly gone bad. The new guideline, based on IFRS 9, moves banks to **expected credit loss (ECL)**: set money aside based on what you expect to lose, before the loan goes bad.
+
+According to [The Daily Star's report on the guideline](https://thedailystar.net/business/news/bb-overhaul-loan-classification-system-2028-4123771), banks must adopt the ECL model for funded and non-funded credit facilities from **1 January 2028**, and for other financial instruments from **1 January 2029**.
+
+## The three stages
+
+IFRS 9 sorts exposures into three stages, and the stage decides how much provision a bank holds.
+
+- **Stage 1: performing.** No significant rise in credit risk since the loan was made. The provision covers losses expected over the next 12 months.
+- **Stage 2: significant increase in credit risk.** The loan is not in default, but something has clearly worsened. The provision covers losses expected over the whole life of the loan.
+- **Stage 3: credit-impaired.** The loan has defaulted or is otherwise impaired. Lifetime losses apply, and interest is typically measured on the net amount.
+
+The important change is stage 2. Under an incurred-loss approach there is no natural place for "this loan is worrying but not yet late". ECL creates one, and that is where earlier warning is supposed to come from.
+
+## Three things that are genuinely new
+
+**1. Forward-looking inputs.** The guideline expects banks to reflect macroeconomic conditions such as GDP growth, inflation and interest-rate trends when assessing credit risk. A provision is no longer only a function of days past due. It becomes partly a view about the economy.
+
+**2. Off-balance-sheet exposure.** Provisioning extends to loan commitments, guarantees and unused credit lines, not only funded loans. For banks with large trade-finance books, this matters. Guarantees and letters of credit sit outside the loan ledger, so in general they can be tracked in different systems from funded loans.
+
+**3. Judgement that has to be explained.** Deciding what counts as a "significant increase in credit risk" is a policy choice, not a lookup. Banks will need defensible rules, documented, and applied consistently.
+
+## Where the real work is: data
+
+In my view the model itself is rarely the hard part. The hard part is the data underneath it.
+
+- Can you reconstruct a borrower's **history**, not just their current status? Staging depends on comparing today's risk with the risk at origination.
+- Are **funded and non-funded** exposures to the same customer linked? Often they live in separate modules.
+- Is **collateral** recorded in a form a model can use, rather than only in a document?
+- Can you **re-run last month** and get the same answer? Auditors will ask.
+
+Core banking systems were built to record transactions, not to replay the history of a credit decision. Closing that gap is mostly data engineering and careful reconciliation, which is unglamorous and takes time.
+
+## What I would do now, as a practitioner
+
+Nothing here is official guidance; it is simply how I would approach a long runway.
+
+1. **Map the data.** For each exposure type, list where the origination rating, current rating, days past due and collateral actually live.
+2. **Run a shadow staging exercise.** Even a rough stage 1/2/3 split on a past month shows quickly where data is missing.
+3. **Write down the stage 2 triggers early.** Policy debates take longer than coding.
+4. **Reconcile to the ledger from day one.** A model that cannot tie back to the general ledger will not survive review.
+
+I use the same habit in my own tools. For example, [Portfolio Pulse](/projects/credit-mis) turns month-end loan workbooks into management reports using synthetic data in public and local processing in practice. That experience makes one thing clear: a number that cannot be traced back to its source is not ready to be relied on.
+
+## Why a long runway is a gift
+
+January 2028 is more than a year away. That is enough time to do this carefully, and not enough time to leave it alone. The banks that treat the next year as a data project, not a modelling project, will have the easiest transition.
+
+I will write more on this as the details settle. If you work on ECL in a Bangladesh bank and see it differently, I would like to hear how.
+
+---
+
+*Sources: [The Daily Star, "BB to overhaul loan classification system from 2028"](https://thedailystar.net/business/news/bb-overhaul-loan-classification-system-2028-4123771), 8 March 2026. Read the guideline text itself on Bangladesh Bank's website before relying on any detail here.*
