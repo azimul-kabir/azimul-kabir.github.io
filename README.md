@@ -34,6 +34,8 @@ Every post has a **Listen** button (`src/components/ListenButton.astro`) that re
 
 The social preview image is `public/og.png`. Edit `scripts/og.html` and run `npx -p playwright node scripts/og.mjs` to regenerate it.
 
+Blog posts and project pages end with a **Share** row (`src/components/ShareButtons.astro`): plain links to X, LinkedIn, Facebook, WhatsApp and email, a button for the device's share sheet where supported, and Copy link. They are ordinary links, with no third-party scripts or tracking.
+
 ## GitHub data
 
 Star counts and latest release versions and publication dates for public repositories are fetched from the GitHub API **at build time** (`src/lib/github.ts`). Actua's latest version and release date appear on the home page and project page. Visitors never call GitHub. If the API is unreachable, the metadata is hidden and the build still succeeds. The site rebuilds within an hour of a new release (see below) and once a day for star counts.

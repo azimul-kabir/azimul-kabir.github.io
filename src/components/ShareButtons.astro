@@ -1,0 +1,64 @@
+---
+// Plain share links (no third-party scripts, so nothing tracks visitors), plus the device's own
+// share sheet where the browser offers one and a copy-link button.
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+// Same URL as the canonical link in Base.astro.
+const url = new URL(Astro.url.pathname.replace(/(index)?\.html$/, ''), Astro.site).href;
+const u = encodeURIComponent(url);
+const t = encodeURIComponent(title);
+const links = [
+  { label: 'X', href: `https://twitter.com/intent/tweet?url=${u}&text=${t}` },
+  { label: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${u}` },
+  { label: 'Facebook', href: `https://www.facebook.com/sharer/sharer.php?u=${u}` },
+  { label: 'WhatsApp', href: `https://wa.me/?text=${t}%20${u}` },
+  { label: 'Email', href: `mailto:?subject=${t}&body=${u}` },
+];
+---
+
+<aside class="mt-14 border-t border-line pt-6" aria-labelledby="share-heading" data-share data-url={url} data-title={title}>
+  <h2 id="share-heading" class="eyebrow">Share</h2>
+  <div class="mt-3 flex flex-wrap gap-2">
+    <button type="button" data-share-native class="btn" hidden>Share…</button>
+    {
+      links.map((l) => (
+        <a href={l.href} class="btn" target="_blank" rel="noopener noreferrer" aria-label={`Share on ${l.label}`}>
+          {l.label}
+        </a>
+      ))
+    }
+    <button type="button" data-share-copy class="btn" aria-live="polite">Copy link</button>
+  </div>
+</aside>
+
+<script>
+  function setup() {
+    const root = document.querySelector<HTMLElement>('[data-share]');
+    if (!root) return;
+    const { url = '', title = '' } = root.dataset;
+
+    const native = root.querySelector<HTMLButtonElement>('[data-share-native]')!;
+    if (typeof navigator.share === 'function') {
+      native.hidden = false;
+      native.addEventListener('click', () => {
+        navigator.share({ title, url }).catch(() => {});
+      });
+    }
+
+    const copy = root.querySelector<HTMLButtonElement>('[data-share-copy]')!;
+    let timer: number | undefined;
+    copy.addEventListener('click', async () => {
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(url);
+        ok = true;
+      } catch {}
+      copy.textContent = ok ? 'Copied' : 'Copy failed';
+      clearTimeout(timer);
+      timer = window.setTimeout(() => (copy.textContent = 'Copy link'), 2000);
+    });
+  }
+  document.addEventListener('astro:page-load', setup);
+</script>
