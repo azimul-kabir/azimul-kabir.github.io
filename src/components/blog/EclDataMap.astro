@@ -1,0 +1,38 @@
+---
+// Where an ECL number comes from: data sources feed the model, and the result has to tie back to the ledger.
+const sources = [
+  { title: 'Rating history', text: 'Risk at origination and today' },
+  { title: 'Funded loans', text: 'Balances and days past due' },
+  { title: 'Non-funded exposure', text: 'Guarantees, LCs, unused limits' },
+  { title: 'Collateral', text: 'In a form a model can use' },
+  { title: 'Economic outlook', text: 'GDP, inflation, interest rates' },
+];
+---
+
+<figure class="not-prose my-10">
+  <div class="grid items-center gap-3 sm:grid-cols-[1.3fr_auto_1fr_auto_1fr]">
+    <ul class="space-y-2">
+      {
+        sources.map((s) => (
+          <li class="rounded-xl border border-line bg-surface px-4 py-2.5">
+            <span class="block text-sm font-medium">{s.title}</span>
+            <span class="block text-xs text-muted">{s.text}</span>
+          </li>
+        ))
+      }
+    </ul>
+    <span class="text-center text-xl text-muted sm:text-2xl" aria-hidden="true"><span class="sm:hidden">↓</span><span class="hidden sm:inline">→</span></span>
+    <div class="rounded-2xl border border-line bg-surface p-4 text-center">
+      <p class="font-medium">Staging and ECL model</p>
+      <p class="mt-1 text-sm text-muted">Stage 1, 2 or 3, then 12-month or lifetime loss</p>
+    </div>
+    <span class="text-center text-xl text-muted sm:text-2xl" aria-hidden="true"><span class="sm:hidden">↓</span><span class="hidden sm:inline">→</span></span>
+    <div class="rounded-2xl border-2 border-accent bg-surface p-4 text-center">
+      <p class="font-medium">Provision</p>
+      <p class="mt-1 text-sm text-muted">Reconciled to the general ledger and repeatable for audit</p>
+    </div>
+  </div>
+  <figcaption class="mt-3 text-center text-sm text-muted">
+    The model is the small part. Most of the work is in the data that feeds it.
+  </figcaption>
+</figure>

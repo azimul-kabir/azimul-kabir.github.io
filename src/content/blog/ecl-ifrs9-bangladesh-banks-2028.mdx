@@ -9,6 +9,9 @@ thumb: ../../assets/blog/ecl-ifrs9-bangladesh-banks-2028/cover.svg
 
 import { Image } from 'astro:assets';
 import cover from '~/assets/blog/ecl-ifrs9-bangladesh-banks-2028/cover.svg';
+import EclTimeline from '~/components/blog/EclTimeline.astro';
+import EclShift from '~/components/blog/EclShift.astro';
+import EclDataMap from '~/components/blog/EclDataMap.astro';
 
 <Image src={cover} alt="Three rising bars labelled Stage 1, Stage 2 and Stage 3 with the date 1 January 2028" widths={[640, 960, 1200]} sizes="(min-width: 768px) 720px, 100vw" class="rounded-xl border border-line" />
 
@@ -20,6 +23,8 @@ Today, provisions in Bangladesh mostly follow an **incurred loss** approach: a b
 
 According to [The Daily Star's report on the guideline](https://thedailystar.net/business/news/bb-overhaul-loan-classification-system-2028-4123771), banks must adopt the ECL model for funded and non-funded credit facilities from **1 January 2028**, and for other financial instruments from **1 January 2029**.
 
+<EclTimeline />
+
 ## The three stages
 
 IFRS 9 sorts exposures into three stages, and the stage decides how much provision a bank holds.
@@ -27,6 +32,8 @@ IFRS 9 sorts exposures into three stages, and the stage decides how much provisi
 - **Stage 1: performing.** No significant rise in credit risk since the loan was made. The provision covers losses expected over the next 12 months.
 - **Stage 2: significant increase in credit risk.** The loan is not in default, but something has clearly worsened. The provision covers losses expected over the whole life of the loan.
 - **Stage 3: credit-impaired.** The loan has defaulted or is otherwise impaired. Lifetime losses apply, and interest is typically measured on the net amount.
+
+<EclShift />
 
 The important change is stage 2. Under an incurred-loss approach there is no natural place for "this loan is worrying but not yet late". ECL creates one, and that is where earlier warning is supposed to come from.
 
@@ -46,6 +53,8 @@ In my view the model itself is rarely the hard part. The hard part is the data u
 - Are **funded and non-funded** exposures to the same customer linked? Often they live in separate modules.
 - Is **collateral** recorded in a form a model can use, rather than only in a document?
 - Can you **re-run last month** and get the same answer? Auditors will ask.
+
+<EclDataMap />
 
 Core banking systems were built to record transactions, not to replay the history of a credit decision. Closing that gap is mostly data engineering and careful reconciliation, which is unglamorous and takes time.
 
