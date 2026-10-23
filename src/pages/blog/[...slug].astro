@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '~/layouts/Base.astro';
+import ListenButton from '~/components/ListenButton.astro';
 import { blogPosts, formatDate, readingTime } from '~/lib/blog';
 
 export async function getStaticPaths() {
@@ -20,6 +21,7 @@ const { Content } = await render(post);
       <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time> · {readingTime(post.body)}
       {post.data.tags.length > 0 && <> · {post.data.tags.join(', ')}</>}
     </p>
+    <ListenButton />
     <div class="prose mt-10 max-w-none text-[17px] prose-zinc dark:prose-invert prose-headings:font-serif prose-a:text-accent prose-code:before:content-none prose-code:after:content-none">
       <Content />
     </div>

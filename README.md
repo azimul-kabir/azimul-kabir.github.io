@@ -30,6 +30,8 @@ Every project in `projects.ts` needs a matching `src/content/projects/<slug>.md`
 
 Blog posts need `title`, `description` and `date` in the frontmatter. Posts with `draft: true` show in `npm run dev` but are left out of the build.
 
+Every post has a **Listen** button (`src/components/ListenButton.astro`) that reads the article aloud with the browser's built-in speech synthesis. It runs on the visitor's device, skips code blocks, figures and tables, and is hidden in browsers without speech support. Add `data-no-listen` to any element that shouldn't be read.
+
 The social preview image is `public/og.png`. Edit `scripts/og.html` and run `npx -p playwright node scripts/og.mjs` to regenerate it.
 
 ## GitHub data
