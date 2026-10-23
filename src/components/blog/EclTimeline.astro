@@ -1,0 +1,38 @@
+---
+// Key dates for Bangladesh Bank's ECL guideline, as reported by The Daily Star (8 March 2026).
+const milestones = [
+  { date: 'Mar 2026', title: 'Guideline issued', text: 'Bangladesh Bank publishes its IFRS 9-based ECL guideline.' },
+  { date: '2026–2027', title: 'The runway', text: 'Time to map data, write policy and run shadow staging.' },
+  { date: '1 Jan 2028', title: 'Credit facilities', text: 'ECL applies to funded and non-funded credit facilities.', major: true },
+  { date: '1 Jan 2029', title: 'Other instruments', text: 'ECL extends to other financial instruments.', major: true },
+];
+---
+
+<figure class="not-prose my-10">
+  <ol class="relative grid gap-0 sm:grid-cols-4">
+    <span
+      class="absolute top-[11px] bottom-[11px] left-[11px] w-px bg-line sm:right-[12%] sm:bottom-auto sm:left-[12%] sm:h-px sm:w-auto"
+      aria-hidden="true"></span>
+    {
+      milestones.map((m) => (
+        <li class="relative flex gap-4 pb-6 sm:flex-col sm:items-center sm:gap-3 sm:px-2 sm:pb-0 sm:text-center">
+          <span
+            class:list={[
+              'relative z-10 mt-0.5 grid size-[22px] shrink-0 place-items-center rounded-full border-2',
+              m.major ? 'border-accent bg-accent' : 'border-accent bg-bg',
+            ]}
+            aria-hidden="true"
+          >
+            {m.major && <span class="size-2 rounded-full bg-bg" />}
+          </span>
+          <span>
+            <span class="block text-xs font-medium tracking-wide text-muted uppercase">{m.date}</span>
+            <span class="mt-0.5 block font-medium">{m.title}</span>
+            <span class="mt-1 block text-sm leading-snug text-muted">{m.text}</span>
+          </span>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption class="mt-5 text-center text-sm text-muted">From the guideline to the two effective dates.</figcaption>
+</figure>
