@@ -14,7 +14,8 @@ import portrait from '~/assets/azim.jpg';
 
 const posts = (await blogPosts()).slice(0, 3);
 const harmonyProject = projects.find((p) => p.slug === 'harmony')!;
-const others = projects.filter((p) => !p.featured && p !== harmonyProject).slice(0, 4);
+const upcoming = projects.filter((p) => p.upcoming);
+const others = projects.filter((p) => !p.featured && !p.upcoming && p !== harmonyProject).slice(0, 4);
 const [actua, harmony] = await Promise.all([repoStats(featured.repo!), repoStats(harmonyProject.repo!)]);
 const nowItems = profile.now.map((item) =>
   item.label === 'Building'
@@ -109,6 +110,20 @@ const nowItems = profile.now.map((item) =>
       }
     </div>
   </section>
+
+  {
+    upcoming.length > 0 && (
+      <section class="container-wide mt-20" aria-labelledby="upcoming">
+        <div class="flex items-baseline justify-between">
+          <h2 id="upcoming" class="eyebrow">Upcoming</h2>
+          <a href="/projects" class="text-sm text-muted hover:text-fg">All projects →</a>
+        </div>
+        <div class="mt-4 grid gap-4 sm:grid-cols-2">
+          {upcoming.map((p) => <ProjectCard project={p} />)}
+        </div>
+      </section>
+    )
+  }
 
   <section class="container-wide mt-20" aria-labelledby="projects">
     <div class="flex items-baseline justify-between">

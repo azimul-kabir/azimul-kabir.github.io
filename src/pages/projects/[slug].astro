@@ -25,7 +25,7 @@ if (releaseLabel) facts.push({ label: 'Latest release', value: releaseLabel });
 const primaryLinks = project.links?.filter((l) => l.primary) ?? [];
 const otherLinks = project.links?.filter((l) => !l.primary) ?? [];
 
-const kind = project.contribution ? 'Contribution' : project.repo ? 'Open source' : 'Private project';
+const kind = project.upcoming ? 'Upcoming' : project.contribution ? 'Contribution' : project.repo ? 'Open source' : 'Private project';
 
 // Image sizing for each gallery layout, inside the max-w-5xl gallery column.
 const layouts = {
@@ -71,6 +71,8 @@ const layouts = {
               </p>
             )}
           </>
+        ) : project.upcoming ? (
+          <p class="mt-6 text-sm text-muted">Not released yet.</p>
         ) : (
           <p class="mt-6 text-sm text-muted">{project.privateNote ?? 'Private'}: the source code isn't public.</p>
         )

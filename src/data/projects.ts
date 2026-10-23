@@ -7,6 +7,7 @@ import actualiHero from '~/assets/actuali-hero.jpg';
 import harmonyHero from '~/assets/harmony-hero.jpg';
 import inventoryHero from '~/assets/inventory-hero.jpg';
 import photoMigratorHero from '~/assets/photo-migrator-hero.png';
+import sotorkoHero from '~/assets/sotorko-hero.jpg';
 
 export type Project = {
   slug: string;
@@ -19,6 +20,8 @@ export type Project = {
   links?: { label: string; href: string; primary?: boolean }[];
   /** Set for projects that are private or internal, so no public link is shown. */
   privateNote?: string;
+  /** Not released yet: shown under "Upcoming" with a badge instead of a source or store link. */
+  upcoming?: boolean;
   featured?: boolean;
   /** A project owned by someone else that I contribute to. */
   contribution?: boolean;
@@ -28,6 +31,18 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: 'sotorko',
+    name: 'Sotorko',
+    summary:
+      'A Bangla-first Android app that helps people spot scams on bKash, Nagad and other mobile money before they send money or share a PIN. Checks run on the phone.',
+    tags: ['Kotlin', 'Jetpack Compose', 'Android'],
+    upcoming: true,
+    image: {
+      src: sotorkoHero,
+      alt: 'Sotorko, a Bangla-first scam checker for bKash and Nagad: phones showing the home screen and a message check result',
+    },
+  },
   {
     slug: 'actua',
     name: 'Actua',
