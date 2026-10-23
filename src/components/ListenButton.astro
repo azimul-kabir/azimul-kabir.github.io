@@ -1,0 +1,97 @@
+---
+// Reads the article aloud with the browser's built-in speech synthesis (nothing leaves the device).
+// Hidden until the script confirms the browser supports it.
+---
+
+<div data-listen hidden class="mt-6 flex items-center gap-2 text-sm">
+  <button type="button" data-listen-toggle class="btn" aria-live="polite">
+    <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M11 5 6 9H3v6h3l5 4V5Z" />
+      <path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" />
+    </svg>
+    <span data-listen-label>Listen</span>
+  </button>
+  <button type="button" data-listen-stop class="btn" hidden>Stop</button>
+</div>
+
+<script>
+  const SKIP = 'pre, figure, svg, table, nav, [data-no-listen], [aria-hidden="true"]';
+
+  function setup() {
+    const root = document.querySelector<HTMLElement>('[data-listen]');
+    const article = document.querySelector<HTMLElement>('article .prose');
+    if (!root || !article || !('speechSynthesis' in window)) return;
+    root.hidden = false;
+
+    const synth = window.speechSynthesis;
+    const toggle = root.querySelector<HTMLButtonElement>('[data-listen-toggle]')!;
+    const stop = root.querySelector<HTMLButtonElement>('[data-listen-stop]')!;
+    const label = root.querySelector<HTMLElement>('[data-listen-label]')!;
+    let state: 'idle' | 'playing' | 'paused' = 'idle';
+    let run = 0;
+
+    function show(next: typeof state) {
+      state = next;
+      label.textContent = next === 'playing' ? 'Pause' : next === 'paused' ? 'Resume' : 'Listen';
+      stop.hidden = next === 'idle';
+    }
+
+    // One chunk per block: long single utterances are cut off by Chrome.
+    function chunks(): string[] {
+      const title = document.querySelector('article h1')?.textContent?.trim();
+      const parts = [...article!.querySelectorAll<HTMLElement>('h2, h3, h4, p, li, blockquote')]
+        .filter((el) => !el.closest(SKIP) && !(el.tagName === 'BLOCKQUOTE' && el.querySelector('p')))
+        .filter((el) => !(el.tagName === 'LI' && el.querySelector('p')))
+        .map((el) => (el.textContent ?? '').replace(/\s+/g, ' ').trim())
+        .filter(Boolean);
+      return title ? [title, ...parts] : parts;
+    }
+
+    function voice() {
+      const lang = document.documentElement.lang || 'en';
+      const voices = synth.getVoices();
+      return voices.find((v) => v.lang.startsWith(lang) && v.default) ?? voices.find((v) => v.lang.startsWith(lang));
+    }
+
+    function play() {
+      const id = ++run;
+      const queue = chunks();
+      const v = voice();
+      show('playing');
+      queue.forEach((text, i) => {
+        const u = new SpeechSynthesisUtterance(text);
+        if (v) u.voice = v;
+        u.lang = v?.lang ?? (document.documentElement.lang || 'en');
+        u.onend = () => {
+          if (id === run && i === queue.length - 1) show('idle');
+        };
+        u.onerror = (e) => {
+          if (id === run && e.error !== 'canceled' && e.error !== 'interrupted') show('idle');
+        };
+        synth.speak(u);
+      });
+    }
+
+    function halt() {
+      run++;
+      synth.cancel();
+      show('idle');
+    }
+
+    toggle.addEventListener('click', () => {
+      if (state === 'idle') play();
+      else if (state === 'playing') {
+        synth.pause();
+        show('paused');
+      } else {
+        synth.resume();
+        show('playing');
+      }
+    });
+    stop.addEventListener('click', halt);
+    window.addEventListener('pagehide', halt);
+    document.addEventListener('astro:before-swap', halt, { once: true });
+  }
+
+  document.addEventListener('astro:page-load', setup);
+</script>
