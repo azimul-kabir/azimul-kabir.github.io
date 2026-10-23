@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import ThemedImage from '~/components/ThemedImage.astro';
 import { getEntry, render } from 'astro:content';
 import Base from '~/layouts/Base.astro';
+import ShareButtons from '~/components/ShareButtons.astro';
 import { projects } from '~/data/projects';
 import { latestReleaseLabel, repoStats } from '~/lib/github';
 
@@ -151,5 +152,8 @@ const layouts = {
         </section>
       )
     }
+    <div class="container-wide">
+      <ShareButtons title={`${project.name}: ${tagline}`} />
+    </div>
   </article>
 </Base>
