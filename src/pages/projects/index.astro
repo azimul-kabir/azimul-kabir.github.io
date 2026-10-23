@@ -3,9 +3,10 @@ import Base from '~/layouts/Base.astro';
 import ProjectCard from '~/components/ProjectCard.astro';
 import { projects } from '~/data/projects';
 
+const upcoming = projects.filter((p) => p.upcoming);
 const open = projects.filter((p) => p.repo && !p.contribution);
 const contributions = projects.filter((p) => p.contribution);
-const closed = projects.filter((p) => !p.repo);
+const closed = projects.filter((p) => !p.repo && !p.upcoming);
 ---
 
 <Base title="Projects" description="Open-source apps, self-hosted tools and private projects by Azimul Kabir Apu.">
@@ -16,6 +17,12 @@ const closed = projects.filter((p) => !p.repo);
       Mostly tools I needed myself: a budgeting app, a music library, a photo archive and a few programs for work and
       family.
     </p>
+
+    <h2 class="eyebrow mt-14">Upcoming</h2>
+    <p class="mt-2 text-sm text-muted">In development and not released yet.</p>
+    <div class="mt-4 grid gap-4 sm:grid-cols-2">
+      {upcoming.map((p) => <ProjectCard project={p} />)}
+    </div>
 
     <h2 class="eyebrow mt-14">Open source</h2>
     <div class="mt-4 grid gap-4 sm:grid-cols-2">

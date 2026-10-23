@@ -29,7 +29,9 @@ const href = `/projects/${project.slug}`;
       <a href={href} class="stretched after:absolute after:inset-0">{project.name}</a>
     </h3>
     {
-      project.privateNote ? (
+      project.upcoming ? (
+        <span class="tag">Coming soon</span>
+      ) : project.privateNote ? (
         <span class="text-xs text-muted">{project.privateNote}</span>
       ) : stats && stats.stars > 0 ? (
         <span class="text-xs text-muted" title="GitHub stars">★ {stats.stars}</span>
